@@ -1,9 +1,13 @@
 <h1>Validation Sandbox</h1>
-<form>
+<form [formGroup]="sandboxFormGroup">
   <div>
     <div><label>Name</label></div>
-    <input type="text" />
+    <input type="text" formControlName="name" />
   </div>
 
   <button type="submit">Submit</button>
 </form>
+
+<p>Status: {{ sandboxFormGroup.status }}</p>
+<p>Value: {{ sandboxFormGroup.value | json }}</p>
+<p>Errors: {{ sandboxFormGroup.errors | json }}</p>
