@@ -4,3 +4,36 @@ html, body {
   margin: 0;
   height: 100%;
 }
+
+// Core styles; TODO: move to own module
+.semi-bold, label {
+  font-weight: 600;
+}
+
+label {
+  margin-bottom: 0;
+}
+
+// Variables; TODO: move to own module
+$magenta: #C8154F;
+$magenta-box-shadow: rgba(200, 21, 79, 0.25);
+
+// Validation styles; TODO: move to own module
+.validation-error-message {
+  color: $magenta;
+}
+
+fa-icon.validation-error {
+  color: $magenta;
+  margin-left: 0.5em;
+}
+
+input.validation-error {
+  border-color: $magenta;
+}
+
+// Bootstrap-specific
+.form-group .form-control.validation-error:focus {
+  border-color: $magenta;
+  box-shadow: 0 0 0 0.2rem $magenta-box-shadow;
+}
