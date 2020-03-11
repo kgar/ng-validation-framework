@@ -22,7 +22,11 @@ export class SandboxComponent implements OnInit {
     return this.sandboxFormGroup.get('name');
   }
   get nameControlErrorMessage() {
-    const topErrorType = Object.keys(this.nameControl.errors)[0];
+    const errors = this.nameControl.errors;
+    if (!errors) {
+      return '';
+    }
+    const topErrorType = Object.keys(errors)[0];
     return validationErrorMessageMap.get(topErrorType)(this.nameControl.errors[topErrorType]);
   }
   get nameControlShowError() {
