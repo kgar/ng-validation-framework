@@ -1,9 +1,15 @@
 # To Do 📃
+- Finish applying basic styles and decoration to the validated Name field
 - Create basic sandbox form for exercising various features of validation
   - Put to-do placeholders in there for each scenario as it is discovered
   - Start solving these scenarios
     - The standard Label/Input validation story
-    - 
+- Graduate the validation message map to a singleton service that can be built up using multi->true injection or some similarly distributed solution.
+- Add required and minlength messages to the map
+- Add custom validator in the same folder where the preexisting validators are having messages applied to the map.
+- 
+- Extract the core validation wrappings ()
+- Add hook for customizing error messages
 - Use something pretty like material, Bulma, or Bootstrap to class the place up
 - Create component(s) for abstracting away the input title, the error icon decoration, and the error message
 - ...

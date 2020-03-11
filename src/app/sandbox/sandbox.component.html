@@ -1,13 +1,20 @@
 <h1>Validation Sandbox</h1>
-<form [formGroup]="sandboxFormGroup">
+<form [formGroup]="sandboxFormGroup" (ngSubmit)="onSubmit()">
   <div>
     <div><label>Name</label></div>
     <input type="text" formControlName="name" />
+    <div *ngIf="nameControlShowError"> {{ nameControlErrorMessage }}</div>
+    <div> {{ nameControl.errors | json }} | Valid: {{ nameControl.valid }} | Dirty: {{ nameControl.dirty }} | Touched: {{ nameControl.touched }}</div>
   </div>
 
   <button type="submit">Submit</button>
 </form>
 
-<p>Status: {{ sandboxFormGroup.status }}</p>
-<p>Value: {{ sandboxFormGroup.value | json }}</p>
-<p>Errors: {{ sandboxFormGroup.errors | json }}</p>
+<h2>Form Group Validation Props</h2>
+<p>
+  Status: {{ sandboxFormGroup.status }}<br />
+  Value: {{ sandboxFormGroup.value | json }}<br />
+  Errors: {{ sandboxFormGroup.errors | json }}<br />
+  Touched: {{ sandboxFormGroup.touched }}<br />
+  Dirty: {{ sandboxFormGroup.dirty }}<br />
+</p>
