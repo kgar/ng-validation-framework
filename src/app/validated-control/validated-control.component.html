@@ -1,0 +1,8 @@
+<div class="form-group">
+  <label>{{ label }}</label>
+  <fa-icon [icon]="faInfoCircle" class="validation-error" *ngIf="showError"></fa-icon>
+  <ng-content [class.test]="showError"></ng-content>
+  <div *ngIf="showError" class="validation-error-message">
+    {{ errorMessage }}
+  </div>
+</div>

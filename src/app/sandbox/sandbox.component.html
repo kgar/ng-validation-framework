@@ -1,22 +1,12 @@
 <h1>Validation Sandbox</h1>
 <form [formGroup]="sandboxFormGroup" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    <label>Name</label>
-    <fa-icon [icon]="faInfoCircle" class="validation-error" *ngIf="nameControlShowError"></fa-icon>
+  <app-validated-control label="Name">
     <input
       type="text"
       class="form-control"
       formControlName="name"
-      [class.validation-error]="nameControlShowError"
     />
-    <div *ngIf="nameControlShowError" class="validation-error-message">
-      {{ nameControlErrorMessage }}
-    </div>
-    <div>
-      {{ nameControl.errors | json }} | Valid: {{ nameControl.valid }} | Dirty:
-      {{ nameControl.dirty }} | Touched: {{ nameControl.touched }}
-    </div>
-  </div>
+  </app-validated-control>
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

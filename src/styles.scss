@@ -28,12 +28,12 @@ fa-icon.validation-error {
   margin-left: 0.5em;
 }
 
-input.validation-error {
+input.validation-error, input.ng-invalid.ng-touched {
   border-color: $magenta;
 }
 
 // Bootstrap-specific
-.form-group .form-control.validation-error:focus {
+.form-group input.form-control.validation-error:focus, input.ng-invalid.ng-touched:focus {
   border-color: $magenta;
   box-shadow: 0 0 0 0.2rem $magenta-box-shadow;
 }
