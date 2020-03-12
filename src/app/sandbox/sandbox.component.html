@@ -1,12 +1,19 @@
 <h1>Validation Sandbox</h1>
 <form [formGroup]="sandboxFormGroup" (ngSubmit)="onSubmit()">
   <app-validated-control label="Name">
-    <input
-      type="text"
-      class="form-control"
-      formControlName="name"
-    />
+    <input type="text" class="form-control" formControlName="name" />
   </app-validated-control>
+
+  <p>Scenario: A series of radio buttons - required field validation</p>
+  <p>Scenario: A checkbox, when checked, enables and requires a text box</p>
+  <p>Scenario: A textarea with a min and max length</p>
+  <p>Scenario: A required dropdown list</p>
+  <p>Scenario: A required Kendo dropdown list</p>
+  <p>Scenario: A textbox with required, minlength, email, maxlength--in that order</p>
+  <p>
+    Scenario: A group of inputs where a specific combination is required. All are invalid, but there
+    should be only one validation message below them.
+  </p>
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
