@@ -1,6 +1,6 @@
-import { Component, ContentChild, Input } from '@angular/core';
+import { Component, ContentChild, Input, OnInit } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { ValidationService } from '../shared/services/validation-metadata.service';
 
 @Component({
@@ -8,10 +8,14 @@ import { ValidationService } from '../shared/services/validation-metadata.servic
   templateUrl: './validated-control.component.html',
   styleUrls: ['./validated-control.component.scss'],
 })
-export class ValidatedControlComponent {
+export class ValidatedControlComponent implements OnInit {
   @ContentChild(NgControl) control: NgControl;
-  faInfoCircle = faInfoCircle;
-  @Input() label = '';
+  faExclamationCircle = faExclamationCircle;
+  @Input() label = undefined;
+  @Input() labelFor = '';
+
+  includeDefaultErrorIcon = true;
+  includeDefaultLabel = true;
 
   get errorMessage() {
     const errors = this.control?.errors;
@@ -31,4 +35,6 @@ export class ValidatedControlComponent {
   }
 
   constructor(private validationService: ValidationService) {}
+
+  ngOnInit(): void {}
 }

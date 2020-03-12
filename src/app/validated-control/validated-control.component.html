@@ -1,7 +1,14 @@
-<div class="validated-control-container">
-  <label>{{ label }}</label>
-  <fa-icon [icon]="faInfoCircle" class="validation-error" *ngIf="showError"></fa-icon>
-  <ng-content [class.test]="showError"></ng-content>
+<div class="validated-control-container" [class.invalid]="showError">
+  <label class="validated-control-label" *ngIf="includeDefaultLabel" [for]="labelFor">{{ label }}</label>
+  <fa-icon
+    [icon]="faExclamationCircle"
+    class="validation-error"
+    *ngIf="includeDefaultErrorIcon"
+    [hidden]="!showError"
+  ></fa-icon>
+  <div>
+    <ng-content [class.test]="showError"></ng-content>
+  </div>
   <div *ngIf="showError" class="validation-error-message">
     {{ errorMessage }}
   </div>

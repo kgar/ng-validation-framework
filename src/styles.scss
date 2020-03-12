@@ -1,5 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+// Variables
+$ultra-dark-gray: #343435;
+$magenta: #c8154f;
+$magenta-box-shadow: rgba(200, 21, 79, 0.25);
+
 // Core styles; TODO: move to own module
+
 :root {
   box-sizing: border-box;
 }
@@ -8,6 +14,11 @@
 ::before,
 ::after {
   box-sizing: inherit;
+}
+
+:root,
+body {
+  color: $ultra-dark-gray;
 }
 
 html {
@@ -36,14 +47,21 @@ main {
   margin-right: auto;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-top: 0;
   margin-block-start: 0;
 }
 
-// Variables; TODO: move to own module
-$magenta: #c8154f;
-$magenta-box-shadow: rgba(200, 21, 79, 0.25);
+textarea {
+  width: 100%;
+  min-height: 5em;
+  resize: none;
+}
 
 // Validation styles; TODO: move to own module
 .validation-error-message {
@@ -56,13 +74,44 @@ fa-icon.validation-error {
 }
 
 input.validation-error,
-input.ng-invalid.ng-touched {
+input.ng-invalid.ng-touched,
+textarea.validation-error,
+textarea.ng-invalid.ng-touched {
   border-color: $magenta;
 }
 
 // Bootstrap-specific
-.validated-control-container input.validation-error:focus,
-input.ng-invalid.ng-touched:focus {
+.validated-control-container {
+  input.validation-error:focus,
+  input.ng-invalid.ng-touched:focus,
+  textarea.validation-error:focus,
+  textarea.ng-invalid.ng-touched:focus {
+    border-color: $magenta;
+    box-shadow: 0 0 0 0.2rem $magenta-box-shadow;
+  }
+}
+
+// Kendo-specific styles
+label.k-radio-label {
+  font-weight: normal;
+  margin-left: 1em;
+}
+
+.k-textarea {
+  @extend textarea;
+}
+
+.k-textbox.ng-invalid.ng-touched,
+.k-textbox.ng-invalid.ng-dirty,
+.k-textarea.ng-invalid.ng-touched,
+.k-textarea.ng-invalid.ng-dirty {
+  color: $ultra-dark-gray;
+  border-color: rgba(0, 0, 0, 0.08); // just putting it back to what it was
+}
+
+.invalid .k-textbox.ng-invalid.ng-touched,
+.invalid .k-textbox.ng-invalid.ng-dirty,
+.invalid .k-textarea.ng-invalid.ng-touched,
+.invalid .k-textarea.ng-invalid.ng-dirty {
   border-color: $magenta;
-  box-shadow: 0 0 0 0.2rem $magenta-box-shadow;
 }

@@ -9,10 +9,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ValidatedControlComponent } from './validated-control/validated-control.component';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { InputsModule } from '@progress/kendo-angular-inputs';
+
 
 @NgModule({
   declarations: [AppComponent, SandboxComponent, ValidatedControlComponent],
-  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FontAwesomeModule, ButtonsModule, BrowserAnimationsModule],
+  imports: [BrowserModule, AppRoutingModule, ReactiveFormsModule, FontAwesomeModule, ButtonsModule, BrowserAnimationsModule, InputsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

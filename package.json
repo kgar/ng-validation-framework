@@ -26,13 +26,16 @@
     "@fortawesome/free-solid-svg-icons": "^5.12.1",
     "@progress/kendo-angular-buttons": "^5.2.3",
     "@progress/kendo-angular-common": "^1.0.0",
+    "@progress/kendo-angular-inputs": "^6.5.0",
     "@progress/kendo-angular-l10n": "^2.0.0",
     "@progress/kendo-angular-popup": "^3.0.0",
     "@progress/kendo-theme-bootstrap": "^4.11.0",
     "@progress/kendo-theme-default": "latest",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
-    "zone.js": "~0.10.2"
+    "zone.js": "~0.10.2",
+    "@progress/kendo-angular-intl": "^2.0.0",
+    "@progress/kendo-drawing": "^1.5.12"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.900.1",

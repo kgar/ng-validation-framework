@@ -1,12 +1,35 @@
 <h1>Validation Sandbox</h1>
 <form [formGroup]="sandboxFormGroup" (ngSubmit)="onSubmit()">
-  <app-validated-control label="Name">
-    <input type="text" formControlName="name" />
+  <app-validated-control label="Name" labelFor="name">
+    <input kendoTextBox formControlName="name" id="name" />
   </app-validated-control>
 
-  <p>Scenario: A series of radio buttons - required field validation</p>
-  <p>Scenario: A checkbox, when checked, enables and requires a text box</p>
+  <app-validated-control label="Animation Type">
+    <label class="k-radio-label"
+      ><input type="radio" class="k-radio" formControlName="animation-type" value="cartoon" />
+      Cartoon</label
+    >
+    <label class="k-radio-label"
+      ><input type="radio" class="k-radio" formControlName="animation-type" value="anime" />
+      Anime</label
+    >
+
+    <button kendoButton style="margin-left: 1em" (click)="deselectAnimationType()" type="button">
+      Deselect Animation Type
+    </button>
+  </app-validated-control>
+
+  <app-validated-control label="Show Description" labelFor="show-description">
+    <textarea kendoTextArea formControlName="description" id="show-description"></textarea>
+  </app-validated-control>
+
   <p>Scenario: A textarea with a min and max length</p>
+
+  <p>Scenario: A checkbox, when checked, enables and requires a text box in a nested form group</p>
+  <p>
+    Scenario: A checkbox, when checked, enables and requires a text box somewhere else in the form
+    that is not in a nested form group together
+  </p>
   <p>Scenario: A required dropdown list</p>
   <p>Scenario: A required Kendo dropdown list</p>
   <p>Scenario: A textbox with required, minlength, email, maxlength--in that order</p>

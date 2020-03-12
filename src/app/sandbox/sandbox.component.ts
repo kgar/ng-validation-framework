@@ -17,6 +17,8 @@ export class SandboxComponent implements OnInit {
 
     this.sandboxFormGroup = fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
+      'animation-type': ['', [Validators.required]],
+      description: ['Description here.', [Validators.maxLength(300), Validators.minLength(50)]],
     });
   }
 
@@ -28,5 +30,9 @@ export class SandboxComponent implements OnInit {
     }
 
     alert('You did it!');
+  }
+
+  deselectAnimationType() {
+    this.sandboxFormGroup.get('animation-type').patchValue('');
   }
 }

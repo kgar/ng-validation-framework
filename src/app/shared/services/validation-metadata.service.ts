@@ -12,6 +12,10 @@ validationMetadataMap.set('minlength', {
   errorMessage: error => `Minimum ${error.requiredLength} characters required.`,
   order: 2,
 });
+validationMetadataMap.set('maxlength', {
+  errorMessage: error => `Maximum ${error.requiredLength} characters allowed.`,
+  order: 3,
+});
 
 @Injectable({
   providedIn: 'root',
