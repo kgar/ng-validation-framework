@@ -1,7 +1,7 @@
 <h1>Validation Sandbox</h1>
 <form [formGroup]="sandboxFormGroup" (ngSubmit)="onSubmit()">
   <app-validated-control label="Name">
-    <input type="text" class="form-control" formControlName="name" />
+    <input type="text" formControlName="name" />
   </app-validated-control>
 
   <p>Scenario: A series of radio buttons - required field validation</p>
@@ -15,7 +15,7 @@
     should be only one validation message below them.
   </p>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" kendoButton [primary]="true">Submit</button>
 </form>
 
 <h2>Form Group Validation Props</h2>
