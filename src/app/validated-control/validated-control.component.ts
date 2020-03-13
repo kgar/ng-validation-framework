@@ -1,8 +1,8 @@
 import { Component, ContentChild, Input, OnInit } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import { ValidationService } from '../shared/services/validation.service';
-import { CustomValidationErrorMessages } from '../shared/models/validation-metadata.model';
+import { ValidationService } from '../shared/validation/validation.service';
+import { CustomValidationErrorMessages } from "../shared/validation/models/custom-validation-error-messages.model";
 
 @Component({
   selector: 'app-validated-control',

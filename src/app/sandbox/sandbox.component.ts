@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { SandboxFormService } from './sandbox-form.service';
-import {
-  CustomValidationErrorMessages,
-} from '../shared/models/validation-metadata.model';
+import { CustomValidationErrorMessages } from "../shared/validation/models/custom-validation-error-messages.model";
 
 @Component({
   selector: 'app-sandbox',

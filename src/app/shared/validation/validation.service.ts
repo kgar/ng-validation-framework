@@ -1,40 +1,19 @@
-import { ValidationMetadata, ValidationErrorMessage } from '../models/validation-metadata.model';
+import { ValidationMetadata } from './models/validation-metadata.model';
+import { ValidationErrorMessage } from './models/validation-error-message.type';
 import { Injectable } from '@angular/core';
-import { ValidationErrorSummary } from '../models/validation-error-summary.model';
+import { ValidationErrorSummary } from './models/validation-error-summary.model';
 import { NgControl } from '@angular/forms';
-
-/*
-  How do I make this extensible and easy to understand...?
-*/
-const validationMetadataMap = new Map<string, ValidationMetadata>();
-validationMetadataMap.set('required', { errorMessage: 'This field is required', order: 1 });
-validationMetadataMap.set('minlength', {
-  errorMessage: error => `Minimum ${error.requiredLength} characters required`,
-  order: 2,
-});
-validationMetadataMap.set('maxlength', {
-  errorMessage: error => `Maximum ${error.requiredLength} characters allowed`,
-  order: 3,
-});
-validationMetadataMap.set('min', {
-  errorMessage: error => {
-    return `Must be at least ${error.min}`;
-  },
-  order: 4,
-});
-validationMetadataMap.set('max', {
-  errorMessage: error => {
-    return `Must be less than ${error.max}`;
-  },
-  order: 5,
-});
+import { ValidationStore } from './validation.store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ValidationService {
+
+  constructor(private store: ValidationStore) {}
+
   private makeMetadata(key: string): ValidationErrorSummary {
-    return { name: key, ...validationMetadataMap.get(key) };
+    return this.store.get(key);
   }
 
   public getHighestPriorityError(errors: object): ValidationErrorSummary {
@@ -67,8 +46,6 @@ export class ValidationService {
   }
 
   public extractErrorMessage(name: string, errorMessage: ValidationErrorMessage, errors: object) {
-    return typeof errorMessage === 'function'
-      ? errorMessage(errors[name])
-      : errorMessage;
+    return typeof errorMessage === 'function' ? errorMessage(errors[name]) : errorMessage;
   }
 }
