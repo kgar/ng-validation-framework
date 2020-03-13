@@ -15,8 +15,8 @@ export class ValidatedControlComponent implements OnInit {
   @Input() label = undefined;
   @Input() labelFor = '';
   @Input() customValidationMessages: CustomValidationErrorMessages = {};
-  useLabelAndErrorIconProps = true;
-  includeDefaultLabel = true;
+  @Input() useLabelAndErrorIconProps = true;
+  @Input() useValidationMessages = true;
 
   public get errorMessage() {
     const errors = this.control?.errors;
@@ -40,6 +40,7 @@ export class ValidatedControlComponent implements OnInit {
 
   ngOnInit(): void {
     this.useLabelAndErrorIconProps =
+      this.useLabelAndErrorIconProps &&
       !(this.ref.nativeElement as HTMLElement).querySelector('[validation-label]') &&
       this.label !== undefined &&
       this.label !== null;

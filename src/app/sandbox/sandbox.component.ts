@@ -16,6 +16,12 @@ export class SandboxComponent implements OnInit {
     return this.formService?.formGroup;
   }
 
+  get remainingDescriptionCharacters(): number {
+    const descriptionCharacterCount = (this.formService.formGroup.get('description')
+      .value as string).length;
+    return this.formService.descriptionMaxLength - descriptionCharacterCount;
+  }
+
   seasonErrorMessages: CustomValidationErrorMessages = {
     min: error => `Must be at least ${error.min} season(s)`,
     max: error => `Must be no more than ${error.max} seasons`,
