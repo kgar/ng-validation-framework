@@ -1,4 +1,12 @@
 # To Do 📃
+
+- Surface option for using label and icon; default => true
+- Create and surface option for using validation message; default => true
+- Extract error label into its own component
+- Extract error icon into its own component
+- Extract error message into its own component
+- Demonstrate custom error message placement
+  - Recreate Default Suffix scenario with long input box and short label. Show custom message "Invalid input" with error icon and tooltip with actual message.
 - Make a shared component with its own formgroup
   - Add a form model
   - Add a form service and compose validation
@@ -21,13 +29,13 @@
 - Add support for validation decoration on basic Kendo controls
   - This could be already done by Kendo, else a directive may suffice to style Kendo controls as errored.
 - Add hook for customizing error messages
-- 
+- Remove magenta box shadows; too much trouble to persist across all inputs
 - ...
-
 
 # Notes 📝
 
 ## Composing/providing validation
+
 Composing metadata for existing validation services is in one place, but it is still a bit messy and accidental.
 
 Composing metadata for new custom services is not yet implemented, but I can see it being much messier still.

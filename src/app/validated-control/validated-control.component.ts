@@ -1,8 +1,8 @@
-import { Component, ContentChild, Input, OnInit } from '@angular/core';
+import { Component, ContentChild, Input, OnInit, ElementRef } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { ValidationService } from '../shared/validation/validation.service';
-import { CustomValidationErrorMessages } from "../shared/validation/models/custom-validation-error-messages.model";
+import { CustomValidationErrorMessages } from '../shared/validation/models/custom-validation-error-messages.model';
 
 @Component({
   selector: 'app-validated-control',
@@ -15,11 +15,10 @@ export class ValidatedControlComponent implements OnInit {
   @Input() label = undefined;
   @Input() labelFor = '';
   @Input() customValidationMessages: CustomValidationErrorMessages = {};
-
-  includeDefaultErrorIcon = true;
+  useLabelAndErrorIconProps = true;
   includeDefaultLabel = true;
 
-  get errorMessage() {
+  public get errorMessage() {
     const errors = this.control?.errors;
     if (!errors) {
       return '';
@@ -33,11 +32,16 @@ export class ValidatedControlComponent implements OnInit {
     return errorMessage;
   }
 
-  get showError() {
+  public get showError() {
     return this.vs.showError(this.control);
   }
 
-  constructor(private vs: ValidationService) {}
+  constructor(private vs: ValidationService, private ref: ElementRef) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.useLabelAndErrorIconProps =
+      !(this.ref.nativeElement as HTMLElement).querySelector('[validation-label]') &&
+      this.label !== undefined &&
+      this.label !== null;
+  }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
 import { SandboxFormService } from './sandbox-form.service';
-import { CustomValidationErrorMessages } from "../shared/validation/models/custom-validation-error-messages.model";
+import { CustomValidationErrorMessages } from '../shared/validation/models/custom-validation-error-messages.model';
 
 @Component({
   selector: 'app-sandbox',
@@ -10,6 +10,7 @@ import { CustomValidationErrorMessages } from "../shared/validation/models/custo
 })
 export class SandboxComponent implements OnInit {
   faInfoCircle = faInfoCircle;
+  faPizzaSlice = faPizzaSlice;
 
   get formGroup() {
     return this.formService?.formGroup;

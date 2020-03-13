@@ -4,18 +4,22 @@
     <input kendoTextBox formControlName="name" id="name" />
   </app-validated-control>
 
-  <app-validated-control label="Animation Type">
+  <p>Sample of custom validation label template / custom validation error icon and icon placement</p>
+  <app-validated-control label="Animation Type" #animationTypeValidation>
+    <div validation-label>
+      <label for="anime">Look at my custom label (click me for Anime 😉)</label>
+    </div>
     <label class="k-radio-label"
       ><input type="radio" class="k-radio" formControlName="animationType" value="cartoon" />
       Cartoon</label
     >
     <label class="k-radio-label"
-      ><input type="radio" class="k-radio" formControlName="animationType" value="anime" />
+      ><input type="radio" class="k-radio" formControlName="animationType" value="anime" id="anime" />
       Anime</label
     >
     <button kendoButton style="margin-left: 1em" (click)="deselectAnimationType()" type="button">
       Deselect Animation Type
-    </button>
+    </button> <fa-icon *ngIf="animationTypeValidation.showError" [icon]="faPizzaSlice" style="color: #C8154F; margin-left: 0.5em"></fa-icon>
   </app-validated-control>
 
   <app-validated-control label="First Air Date">
