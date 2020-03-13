@@ -7,14 +7,20 @@ import { FormControl, AbstractControl, NgControl, AbstractControlDirective } fro
   How do I make this extensible and easy to understand...?
 */
 const validationMetadataMap = new Map<string, ValidationMetadata>();
-validationMetadataMap.set('required', { errorMessage: 'This field is required.', order: 1 });
+validationMetadataMap.set('required', { errorMessage: 'This field is required', order: 1 });
 validationMetadataMap.set('minlength', {
-  errorMessage: error => `Minimum ${error.requiredLength} characters required.`,
+  errorMessage: error => `Minimum ${error.requiredLength} characters required`,
   order: 2,
 });
 validationMetadataMap.set('maxlength', {
-  errorMessage: error => `Maximum ${error.requiredLength} characters allowed.`,
+  errorMessage: error => `Maximum ${error.requiredLength} characters allowed`,
   order: 3,
+});
+validationMetadataMap.set('min', {
+  errorMessage: error => {
+    return `Must be at least ${error.min}`;
+  },
+  order: 4,
 });
 
 @Injectable({

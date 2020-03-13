@@ -115,3 +115,8 @@ label.k-radio-label {
 .invalid .k-textarea.ng-invalid.ng-dirty {
   border-color: $magenta;
 }
+
+.k-widget.k-state-invalid>.k-numeric-wrap, .ng-invalid.ng-touched>.k-numeric-wrap, .ng-invalid.ng-dirty>.k-numeric-wrap {
+  border-color: $magenta;
+  color: $ultra-dark-gray;
+}

@@ -1,22 +1,30 @@
 <h1>Validation Sandbox</h1>
-<form [formGroup]="sandboxFormGroup" (ngSubmit)="onSubmit()">
+<form [formGroup]="formService.formGroup" (ngSubmit)="onSubmit()">
   <app-validated-control label="Name" labelFor="name">
     <input kendoTextBox formControlName="name" id="name" />
   </app-validated-control>
 
   <app-validated-control label="Animation Type">
     <label class="k-radio-label"
-      ><input type="radio" class="k-radio" formControlName="animation-type" value="cartoon" />
+      ><input type="radio" class="k-radio" formControlName="animationType" value="cartoon" />
       Cartoon</label
     >
     <label class="k-radio-label"
-      ><input type="radio" class="k-radio" formControlName="animation-type" value="anime" />
+      ><input type="radio" class="k-radio" formControlName="animationType" value="anime" />
       Anime</label
     >
-
     <button kendoButton style="margin-left: 1em" (click)="deselectAnimationType()" type="button">
       Deselect Animation Type
     </button>
+  </app-validated-control>
+
+  <app-validated-control label="First Air Date">
+    <kendo-datepicker formControlName="firstAirDate"></kendo-datepicker>
+    <button type="button" (click)="setFirstAirDateToToday()" kendoButton>Today</button>
+  </app-validated-control>
+
+  <app-validated-control label="Total Seasons To Date">
+    <kendo-numerictextbox formControlName="totalSeasonsToDate" [format]="'#'"></kendo-numerictextbox>
   </app-validated-control>
 
   <app-validated-control label="Show Description" labelFor="show-description">
@@ -42,10 +50,10 @@
 </form>
 
 <h2>Form Group Validation Props</h2>
-<p>
-  Status: {{ sandboxFormGroup.status }}<br />
-  Value: {{ sandboxFormGroup.value | json }}<br />
-  Errors: {{ sandboxFormGroup.errors | json }}<br />
-  Touched: {{ sandboxFormGroup.touched }}<br />
-  Dirty: {{ sandboxFormGroup.dirty }}<br />
+<p *ngIf="formGroup">
+  Status: {{ formGroup.status }}<br />
+  Value: {{ formGroup.value | json }}<br />
+  Errors: {{ formGroup.errors | json }}<br />
+  Touched: {{ formGroup.touched }}<br />
+  Dirty: {{ formGroup.dirty }}<br />
 </p>

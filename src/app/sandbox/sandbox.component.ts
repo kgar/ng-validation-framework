@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import { ValidationService } from '../shared/services/validation-metadata.service';
+import { SandboxForm } from './sandbox-form.model';
+import { SandboxFormService } from './sandbox-form.service';
 
 @Component({
   selector: 'app-sandbox',
@@ -9,23 +11,20 @@ import { ValidationService } from '../shared/services/validation-metadata.servic
   styleUrls: ['./sandbox.component.scss'],
 })
 export class SandboxComponent implements OnInit {
-  sandboxFormGroup: FormGroup;
   faInfoCircle = faInfoCircle;
 
-  ngOnInit(): void {
-    const fb = new FormBuilder();
-
-    this.sandboxFormGroup = fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      'animation-type': ['', [Validators.required]],
-      description: ['Description here.', [Validators.maxLength(300), Validators.minLength(50)]],
-    });
+  get formGroup() {
+    return this.formService?.formGroup;
   }
 
-  onSubmit() {
-    this.sandboxFormGroup.markAllAsTouched();
+  constructor(public formService: SandboxFormService) {}
 
-    if (!this.sandboxFormGroup.valid) {
+  ngOnInit(): void {}
+
+  onSubmit() {
+    this.formService.formGroup.markAllAsTouched();
+
+    if (!this.formService.formGroup.valid) {
       return;
     }
 
@@ -33,6 +32,10 @@ export class SandboxComponent implements OnInit {
   }
 
   deselectAnimationType() {
-    this.sandboxFormGroup.get('animation-type').patchValue('');
+    this.formService.patch({ animationType: '' });
+  }
+
+  setFirstAirDateToToday() {
+    this.formService.patch({ firstAirDate: new Date() });
   }
 }
