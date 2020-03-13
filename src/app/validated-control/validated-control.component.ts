@@ -1,7 +1,8 @@
 import { Component, ContentChild, Input, OnInit } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import { ValidationService } from '../shared/services/validation-metadata.service';
+import { ValidationService } from '../shared/services/validation.service';
+import { CustomValidationErrorMessages } from '../shared/models/validation-metadata.model';
 
 @Component({
   selector: 'app-validated-control',
@@ -13,6 +14,7 @@ export class ValidatedControlComponent implements OnInit {
   faExclamationCircle = faExclamationCircle;
   @Input() label = undefined;
   @Input() labelFor = '';
+  @Input() customValidationMessages: CustomValidationErrorMessages = {};
 
   includeDefaultErrorIcon = true;
   includeDefaultLabel = true;
@@ -22,19 +24,20 @@ export class ValidatedControlComponent implements OnInit {
     if (!errors) {
       return '';
     }
-    const topError = this.validationService.getHighestPriorityError(this.control.errors);
+    const topError = this.vs.getHighestPriorityError(this.control.errors);
+    const customErrorMessage = this.customValidationMessages[topError.name];
     const errorMessage =
-      typeof topError.errorMessage === 'function'
-        ? topError.errorMessage(this.control.errors[topError.name])
-        : topError.errorMessage;
+      customErrorMessage !== undefined
+        ? this.vs.extractErrorMessage(topError.name, customErrorMessage, this.control.errors)
+        : this.vs.extractErrorMessage(topError.name, topError.errorMessage, this.control.errors);
     return errorMessage;
   }
 
   get showError() {
-    return this.validationService.showError(this.control);
+    return this.vs.showError(this.control);
   }
 
-  constructor(private validationService: ValidationService) {}
+  constructor(private vs: ValidationService) {}
 
   ngOnInit(): void {}
 }

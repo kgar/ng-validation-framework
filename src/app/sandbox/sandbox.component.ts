@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-import { ValidationService } from '../shared/services/validation-metadata.service';
-import { SandboxForm } from './sandbox-form.model';
 import { SandboxFormService } from './sandbox-form.service';
+import {
+  CustomValidationErrorMessages,
+} from '../shared/models/validation-metadata.model';
 
 @Component({
   selector: 'app-sandbox',
@@ -16,6 +16,11 @@ export class SandboxComponent implements OnInit {
   get formGroup() {
     return this.formService?.formGroup;
   }
+
+  seasonErrorMessages: CustomValidationErrorMessages = {
+    min: error => `Must be at least ${error.min} season(s)`,
+    max: error => `Must be less than ${error.max} seasons`,
+  };
 
   constructor(public formService: SandboxFormService) {}
 

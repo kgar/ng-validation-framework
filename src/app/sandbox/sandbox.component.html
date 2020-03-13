@@ -23,8 +23,11 @@
     <button type="button" (click)="setFirstAirDateToToday()" kendoButton>Today</button>
   </app-validated-control>
 
-  <app-validated-control label="Total Seasons To Date">
-    <kendo-numerictextbox formControlName="totalSeasonsToDate" [format]="'#'"></kendo-numerictextbox>
+  <app-validated-control
+    label="Total Seasons To Date"
+    [customValidationMessages]="seasonErrorMessages"
+  >
+    <kendo-numerictextbox formControlName="totalSeasonsToDate" format="#"></kendo-numerictextbox>
   </app-validated-control>
 
   <app-validated-control label="Show Description" labelFor="show-description">

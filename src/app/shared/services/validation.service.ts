@@ -1,7 +1,7 @@
-import { ValidationMetadata } from '../models/validation-metadata.model';
+import { ValidationMetadata, ValidationErrorMessage } from '../models/validation-metadata.model';
 import { Injectable } from '@angular/core';
 import { ValidationErrorSummary } from '../models/validation-error-summary.model';
-import { FormControl, AbstractControl, NgControl, AbstractControlDirective } from '@angular/forms';
+import { NgControl } from '@angular/forms';
 
 /*
   How do I make this extensible and easy to understand...?
@@ -21,6 +21,12 @@ validationMetadataMap.set('min', {
     return `Must be at least ${error.min}`;
   },
   order: 4,
+});
+validationMetadataMap.set('max', {
+  errorMessage: error => {
+    return `Must be less than ${error.max}`;
+  },
+  order: 5,
 });
 
 @Injectable({
@@ -58,5 +64,11 @@ export class ValidationService {
 
   public showError(control: NgControl) {
     return control !== undefined ? control.invalid && control.touched : false;
+  }
+
+  public extractErrorMessage(name: string, errorMessage: ValidationErrorMessage, errors: object) {
+    return typeof errorMessage === 'function'
+      ? errorMessage(errors[name])
+      : errorMessage;
   }
 }
