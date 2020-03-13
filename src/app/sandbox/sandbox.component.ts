@@ -18,7 +18,7 @@ export class SandboxComponent implements OnInit {
 
   seasonErrorMessages: CustomValidationErrorMessages = {
     min: error => `Must be at least ${error.min} season(s)`,
-    max: error => `Must be less than ${error.max} seasons`,
+    max: error => `Must be no more than ${error.max} seasons`,
   };
 
   constructor(public formService: SandboxFormService) {}

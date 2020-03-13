@@ -26,7 +26,7 @@ export class ValidationStore {
     });
     this.validationMetadataMap.set('max', {
       errorMessage: error => {
-        return `Must be less than ${error.max}`;
+        return `Must be no more than ${error.max}`;
       },
       order: 5,
     });
