@@ -1,5 +1,5 @@
 # To Do 📃
-
+- Add custom validator for unspecial characters. Register message and order.
 - Demonstrate custom error message placement
   - Recreate Default Suffix scenario with long input box and short label. Show custom message "Invalid input" with error icon and tooltip with actual message.
 - Make a shared component with its own formgroup

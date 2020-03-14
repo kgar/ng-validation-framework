@@ -7,4 +7,5 @@ export interface SandboxForm {
   description?: string;
   firstAirDate?: Date;
   totalSeasonsToDate?: number;
+  unspecialCharacters?: string;
 }

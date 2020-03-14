@@ -19,6 +19,7 @@ export class SandboxFormService {
       ],
       firstAirDate: [null],
       totalSeasonsToDate: [0, [Validators.min(1), Validators.max(9000)]],
+      unspecialCharacters: [''],
     });
   }
 
