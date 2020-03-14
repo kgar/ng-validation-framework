@@ -1,9 +1,7 @@
 <div class="validated-control-container" [class.invalid]="showError">
   <div *ngIf="useLabelAndErrorIconProps">
     <label class="validated-control-label" [for]="labelFor">{{ label }}</label>
-    <ng-container *ngIf="useLabelAndErrorIconProps">
-      <fa-icon [icon]="faExclamationCircle" class="validation-error" *ngIf="showError"></fa-icon>
-    </ng-container>
+    <app-validation-error-icon *ngIf="showError"></app-validation-error-icon>
   </div>
   <ng-content></ng-content>
   <div class="validation-error-message" *ngIf="useValidationMessages && showError">

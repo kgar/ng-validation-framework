@@ -1,10 +1,5 @@
 # To Do 📃
 
-- Surface option for using label and icon; default => true
-- Create and surface option for using validation message; default => true
-- Extract error label into its own component
-- Extract error icon into its own component
-- Extract error message into its own component
 - Demonstrate custom error message placement
   - Recreate Default Suffix scenario with long input box and short label. Show custom message "Invalid input" with error icon and tooltip with actual message.
 - Make a shared component with its own formgroup

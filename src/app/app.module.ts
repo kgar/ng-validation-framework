@@ -12,9 +12,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { SandboxFormService } from './sandbox/sandbox-form.service';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+import { ValidationErrorIconComponent } from './shared/validation/components/validation-error-icon/validation-error-icon.component';
 
 @NgModule({
-  declarations: [AppComponent, SandboxComponent, ValidatedControlComponent],
+  declarations: [AppComponent, SandboxComponent, ValidatedControlComponent, ValidationErrorIconComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
