@@ -1,6 +1,6 @@
 import { ValidationErrorMessage } from './models/validation-error-message.type';
 import { Injectable } from '@angular/core';
-import { NgControl } from '@angular/forms';
+import { NgControl, AbstractFormGroupDirective, AbstractControlDirective } from '@angular/forms';
 import { AppValidators } from './app-validators.service';
 import { AppValidator } from './models/app-validator.model';
 
@@ -43,8 +43,8 @@ export class ValidationService {
     return highestPriorityError;
   }
 
-  public showError(control: NgControl) {
-    return control !== undefined ? control.invalid && control.touched : false;
+  public showError(directive: AbstractFormGroupDirective | AbstractControlDirective) {
+    return directive !== undefined ? directive.invalid && directive.touched : false;
   }
 
   public extractErrorMessage(name: string, errorMessage: ValidationErrorMessage, errors: object) {

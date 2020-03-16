@@ -1,7 +1,8 @@
-import { Component, Input, OnInit, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, ContentChild } from '@angular/core';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { ValidationService } from '../../validation.service';
 import { ValidatedComponentBase } from '../../models/validated-component-base.model';
+import { NgControl } from '@angular/forms';
 
 @Component({
   selector: 'app-validated-control',
@@ -10,6 +11,7 @@ import { ValidatedComponentBase } from '../../models/validated-component-base.mo
 })
 export class ValidatedControlComponent extends ValidatedComponentBase implements OnInit {
   faExclamationCircle = faExclamationCircle;
+  @ContentChild(NgControl) control: NgControl;
   @Input() label = undefined;
   @Input() labelFor = '';
   @Input() useLabelAndErrorIconProps = true;
@@ -26,11 +28,11 @@ export class ValidatedControlComponent extends ValidatedComponentBase implements
       return '';
     }
 
-    return super.errorMessage;
+    return super.getHighestPriorityErrorMessage(this.control);
   }
 
   public get showError() {
-    return this.forceValidationDecoration || super.showError;
+    return this.forceValidationDecoration || super.shouldShowError(this.control);
   }
 
   constructor(vs: ValidationService, private ref: ElementRef) {
