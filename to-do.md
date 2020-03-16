@@ -1,6 +1,6 @@
 # To Do 📃
-- Decorate Name / Animation Type when the King of the Hill validation error fires.
 - Demonstrate custom error message placement
+  - Use description field
   - Recreate Default Suffix scenario with long input box and short label. Show custom message "Invalid input" with error icon and tooltip with actual message.
 - Make a shared component with its own formgroup
   - Add a form model
