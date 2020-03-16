@@ -12,6 +12,8 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
 import { SandboxFormService } from './sandbox/sandbox-form.service';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { ValidationModule } from './shared/validation/validation.module';
+import { TooltipModule } from '@progress/kendo-angular-tooltip';
+
 
 @NgModule({
   declarations: [AppComponent, SandboxComponent],
@@ -25,6 +27,7 @@ import { ValidationModule } from './shared/validation/validation.module';
     BrowserAnimationsModule,
     InputsModule,
     DateInputsModule,
+    TooltipModule,
   ],
   providers: [SandboxFormService],
   bootstrap: [AppComponent],

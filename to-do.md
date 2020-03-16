@@ -1,7 +1,4 @@
 # To Do 📃
-- Demonstrate custom error message placement
-  - Use description field
-  - Recreate Default Suffix scenario with long input box and short label. Show custom message "Invalid input" with error icon and tooltip with actual message.
 - Make a shared component with its own formgroup
   - Add a form model
   - Add a form service and compose validation

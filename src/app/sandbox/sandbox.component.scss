@@ -5,3 +5,15 @@ form > * + * {
 app-validated-control {
   display: block;
 }
+
+.description-label-container {
+  display: flex;
+
+  > * {
+    flex: 0 0 auto;
+  }
+
+  > * + * {
+    margin-left: 0.5em;
+  }
+}

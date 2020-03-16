@@ -62,10 +62,20 @@
 
     <app-validated-control
       label="Show Description"
-      labelFor="show-description"
       [useValidationMessages]="false"
+      [useLabelAndErrorIconProps]="false"
       #descriptionValidation
     >
+      <div class="description-label-container" kendoTooltip>
+        <label for="show-description">Show Description</label>
+        <div
+          class="validation-error-message"
+          *ngIf="descriptionValidation.showError"
+          [title]="descriptionValidation.errorMessage"
+        >
+          Invalid input <app-validation-error-icon></app-validation-error-icon>
+        </div>
+      </div>
       <textarea kendoTextArea formControlName="description" id="show-description"></textarea>
       <div
         style="text-align: right;"
