@@ -1,6 +1,5 @@
 # To Do 📃
-- Make AppValidators\[key\] case insensitive, whether through a helper function or otherwise.
-- Add form-specific validator and store near the form. Use custom messaging and ordering instead of registered.
+- Decorate Name / Animation Type when the King of the Hill validation error fires.
 - Demonstrate custom error message placement
   - Recreate Default Suffix scenario with long input box and short label. Show custom message "Invalid input" with error icon and tooltip with actual message.
 - Make a shared component with its own formgroup

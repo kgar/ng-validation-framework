@@ -2,26 +2,35 @@ import { Injectable } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SandboxForm } from './sandbox-form.model';
 import { AppValidators } from '../shared/validation/app-validators.service';
+import { KingOfTheHillAnimeValidatorFn } from './koth-anime.validator';
 
 @Injectable()
 export class SandboxFormService {
   formGroup: FormGroup;
 
-  constructor(private fb: FormBuilder) {
-    this.formGroup = fb.group({
-      name: ['', [AppValidators.required.fn, AppValidators.minlength.fn(2)]],
-      animationType: ['', AppValidators.required.fn],
-      description: [
-        'Description here.',
-        [
-          AppValidators.maxlength.fn(this.descriptionMaxLength),
-          AppValidators.minlength.fn(this.descriptionMinLength),
+  constructor(fb: FormBuilder) {
+    const kingOfTheHillValidator = KingOfTheHillAnimeValidatorFn(() => this.formGroup);
+
+    this.formGroup = fb.group(
+      {
+        name: [
+          '',
+          [AppValidators.required.fn, AppValidators.minlength.fn(2)],
         ],
-      ],
-      firstAirDate: [null],
-      totalSeasonsToDate: [0, [AppValidators.min.fn(1), AppValidators.max.fn(9000)]],
-      alphanumericCharacters: ['', [AppValidators.alphanumeric.fn]],
-    });
+        animationType: ['', AppValidators.required.fn],
+        description: [
+          'Description here.',
+          [
+            AppValidators.maxlength.fn(this.descriptionMaxLength),
+            AppValidators.minlength.fn(this.descriptionMinLength),
+          ],
+        ],
+        firstAirDate: [null],
+        totalSeasonsToDate: [0, [AppValidators.min.fn(1), AppValidators.max.fn(9000)]],
+        alphanumericCharacters: ['', [AppValidators.alphanumeric.fn]],
+      },
+      { validators: [kingOfTheHillValidator] },
+    );
   }
 
   public get descriptionMinLength() {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { faInfoCircle, faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
 import { SandboxFormService } from './sandbox-form.service';
 import { CustomValidationErrorMessages } from '../shared/validation/models/custom-validation-error-messages.model';
+import { KingOfTheHillAnimeValidator } from './koth-anime.validator';
 
 @Component({
   selector: 'app-sandbox',
@@ -11,6 +12,7 @@ import { CustomValidationErrorMessages } from '../shared/validation/models/custo
 export class SandboxComponent implements OnInit {
   faInfoCircle = faInfoCircle;
   faPizzaSlice = faPizzaSlice;
+  kingOfTheHillValidator = KingOfTheHillAnimeValidator;
 
   get formGroup() {
     return this.formService?.formGroup;

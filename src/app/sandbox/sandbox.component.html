@@ -54,7 +54,10 @@
     #descriptionValidation
   >
     <textarea kendoTextArea formControlName="description" id="show-description"></textarea>
-    <div style="text-align: right;" [class.validation-error-message]="descriptionValidation.showError">
+    <div
+      style="text-align: right;"
+      [class.validation-error-message]="descriptionValidation.showError"
+    >
       Min: {{ 50 }}, Remaining: {{ remainingDescriptionCharacters }}
     </div>
   </app-validated-control>
@@ -79,6 +82,7 @@
   </p>
 
   <button type="submit" kendoButton [primary]="true">Submit</button>
+  <p class="validation-error-message" *ngIf="formGroup?.errors?.kingOfTheHillAnime">{{ kingOfTheHillValidator.errorMessage }}</p>
 </form>
 
 <h2>Form Group Validation Props</h2>
