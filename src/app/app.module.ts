@@ -6,17 +6,17 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SandboxComponent } from './sandbox/sandbox.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ValidatedControlComponent } from './validated-control/validated-control.component';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { SandboxFormService } from './sandbox/sandbox-form.service';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
-import { ValidationErrorIconComponent } from './shared/validation/components/validation-error-icon/validation-error-icon.component';
+import { ValidationModule } from './shared/validation/validation.module';
 
 @NgModule({
-  declarations: [AppComponent, SandboxComponent, ValidatedControlComponent, ValidationErrorIconComponent],
+  declarations: [AppComponent, SandboxComponent],
   imports: [
+    ValidationModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
