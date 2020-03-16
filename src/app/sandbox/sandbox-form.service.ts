@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SandboxForm } from './sandbox-form.model';
+import { AppValidators } from '../shared/validation/app-validators.service';
 
 @Injectable()
 export class SandboxFormService {
@@ -8,7 +9,7 @@ export class SandboxFormService {
 
   constructor(private fb: FormBuilder) {
     this.formGroup = fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
+      name: ['', [AppValidators.required.fn, AppValidators.minlength.fn(2)]],
       animationType: ['', Validators.required],
       description: [
         'Description here.',

@@ -1,5 +1,6 @@
 # To Do 📃
-- Add custom validator for unspecial characters. Register message and order.
+- Make AppValidators\[key\] case insensitive, whether through a helper function or otherwise.
+- Add form-specific validator and store near the form. Use custom messaging and ordering instead of registered.
 - Demonstrate custom error message placement
   - Recreate Default Suffix scenario with long input box and short label. Show custom message "Invalid input" with error icon and tooltip with actual message.
 - Make a shared component with its own formgroup
