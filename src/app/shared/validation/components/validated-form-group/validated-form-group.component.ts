@@ -15,7 +15,6 @@ export class ValidatedFormGroupComponent extends ValidatedComponentBase {
   }
 
   public get showError() {
-    console.log('show error for form group', this.formGroup);
     return super.shouldShowError(this.formGroup);
   }
 }

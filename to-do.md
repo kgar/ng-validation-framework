@@ -1,12 +1,4 @@
 # To Do 📃
-- Convert King-of-the-hill error to use the form group component wrapper
-  - Crack how to extract prioritized canned messages versus custom messages.
-    - One option: @Input() customValidators
-      - Allow for custom messages to override existing or custom validators
-      - Allow custom validators to be included in the validation check for a form group or form control component
-    - The validator may or may not exist in the canned validators class
-    - There may or may not be custom messages
-    - Ultimately, we'll return an empty string if all else fails
 - Demonstrate custom error message placement
   - Use description field
   - Recreate Default Suffix scenario with long input box and short label. Show custom message "Invalid input" with error icon and tooltip with actual message.

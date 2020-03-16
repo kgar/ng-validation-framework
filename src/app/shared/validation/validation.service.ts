@@ -1,6 +1,6 @@
 import { ValidationErrorMessage } from './models/validation-error-message.type';
 import { Injectable } from '@angular/core';
-import { NgControl, AbstractFormGroupDirective, AbstractControlDirective } from '@angular/forms';
+import { AbstractFormGroupDirective, AbstractControlDirective } from '@angular/forms';
 import { AppValidators } from './app-validators.service';
 import { AppValidator } from './models/app-validator.model';
 
@@ -10,7 +10,10 @@ import { AppValidator } from './models/app-validator.model';
 export class ValidationService {
   private validatorKeysLookup: {};
 
-  public getHighestPriorityError(errors: object): AppValidator {
+  public getHighestPriorityValidator(
+    errors: object,
+    customValidators?: AppValidator[],
+  ): AppValidator {
     if (!errors) {
       return undefined;
     }
@@ -19,7 +22,7 @@ export class ValidationService {
 
     let highestPriorityError: AppValidator;
     keys.forEach(key => {
-      const currentSummary = this.getValidator(key);
+      const currentSummary = this.getValidator(key, customValidators);
 
       if (currentSummary === undefined) {
         console.error(
@@ -58,9 +61,11 @@ export class ValidationService {
     }, {});
   }
 
-  private getValidator(key: string): AppValidator {
+  private getValidator(key: string, customValidators?: AppValidator[]): AppValidator {
     this.validatorKeysLookup = this.validatorKeysLookup || this.createNormalizeKeyLookup();
-
-    return AppValidators[this.validatorKeysLookup[key.toLowerCase()]];
+    return (
+      AppValidators[this.validatorKeysLookup[key.toLowerCase()]] ||
+      customValidators?.find(v => v.name.toLocaleLowerCase() === key.toLocaleLowerCase())
+    );
   }
 }

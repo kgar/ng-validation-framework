@@ -12,9 +12,7 @@ import { KingOfTheHillAnimeValidator } from './koth-anime.validator';
 export class SandboxComponent implements OnInit {
   faInfoCircle = faInfoCircle;
   faPizzaSlice = faPizzaSlice;
-  formCustomValidationMessages = {
-    [KingOfTheHillAnimeValidator.name]: KingOfTheHillAnimeValidator.errorMessage
-  }
+  customFormValidators = [KingOfTheHillAnimeValidator];
 
   get formGroup() {
     return this.formService?.formGroup;
