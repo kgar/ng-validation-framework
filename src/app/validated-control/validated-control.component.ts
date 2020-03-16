@@ -17,12 +17,24 @@ export class ValidatedControlComponent implements OnInit {
   @Input() customValidationMessages: CustomValidationErrorMessages = {};
   @Input() useLabelAndErrorIconProps = true;
   @Input() useValidationMessages = true;
+  @Input() set forceValidationDecoration(val: boolean) {
+    if (val) {
+      this.control?.control.setErrors({ validatedControlForcedError: true });
+    } else {
+      this.control?.control.setErrors(null);
+    }
+  }
 
   public get errorMessage() {
     const errors = this.control?.errors;
     if (!errors) {
       return '';
     }
+
+    if (this.control.errors.validatedControlForcedError) {
+      return '';
+    }
+
     const topError = this.vs.getHighestPriorityError(this.control.errors);
     const customErrorMessage = this.customValidationMessages[topError.name];
     const errorMessage =
@@ -33,7 +45,7 @@ export class ValidatedControlComponent implements OnInit {
   }
 
   public get showError() {
-    return this.vs.showError(this.control);
+    return this.forceValidationDecoration || this.vs.showError(this.control);
   }
 
   constructor(private vs: ValidationService, private ref: ElementRef) {}

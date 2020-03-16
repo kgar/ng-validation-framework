@@ -1,13 +1,13 @@
 <h1>Validation Sandbox</h1>
 <form [formGroup]="formService.formGroup" (ngSubmit)="onSubmit()">
-  <app-validated-control label="Name" labelFor="name">
+  <app-validated-control label="Name" labelFor="name" [forceValidationDecoration]="formGroup?.errors?.kingOfTheHillAnime">
     <input kendoTextBox formControlName="name" id="name" />
   </app-validated-control>
 
   <div>
     Sample of custom validation label template / custom validation error icon and icon placement
   </div>
-  <app-validated-control label="Animation Type" #animationTypeValidation>
+  <app-validated-control label="Animation Type" #animationTypeValidation [forceValidationDecoration]="formGroup?.errors?.kingOfTheHillAnime">
     <div validation-label>
       <label for="anime">Look at my custom label (click me for Anime 😉)</label>
     </div>
