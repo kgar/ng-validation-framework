@@ -8,6 +8,7 @@ import { AppValidator } from './models/app-validator.model';
   providedIn: 'root',
 })
 export class ValidationService {
+  private validatorKeysLookup: {};
 
   public getHighestPriorityError(errors: object): AppValidator {
     if (!errors) {
@@ -18,7 +19,7 @@ export class ValidationService {
 
     let highestPriorityError: AppValidator;
     keys.forEach(key => {
-      const currentSummary = AppValidators[key];
+      const currentSummary = this.getValidator(key);
 
       if (currentSummary === undefined) {
         console.error(
@@ -48,5 +49,18 @@ export class ValidationService {
 
   public extractErrorMessage(name: string, errorMessage: ValidationErrorMessage, errors: object) {
     return typeof errorMessage === 'function' ? errorMessage(errors[name]) : errorMessage;
+  }
+
+  private createNormalizeKeyLookup() {
+    return Object.keys(AppValidators).reduce((keys, k) => {
+      keys[k.toLowerCase()] = k;
+      return keys;
+    }, {});
+  }
+
+  private getValidator(key: string): AppValidator {
+    this.validatorKeysLookup = this.validatorKeysLookup || this.createNormalizeKeyLookup();
+
+    return AppValidators[this.validatorKeysLookup[key.toLowerCase()]];
   }
 }

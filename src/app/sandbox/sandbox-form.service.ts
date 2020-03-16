@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { SandboxForm } from './sandbox-form.model';
 import { AppValidators } from '../shared/validation/app-validators.service';
 
@@ -10,17 +10,17 @@ export class SandboxFormService {
   constructor(private fb: FormBuilder) {
     this.formGroup = fb.group({
       name: ['', [AppValidators.required.fn, AppValidators.minlength.fn(2)]],
-      animationType: ['', Validators.required],
+      animationType: ['', AppValidators.required.fn],
       description: [
         'Description here.',
         [
-          Validators.maxLength(this.descriptionMaxLength),
-          Validators.minLength(this.descriptionMinLength),
+          AppValidators.maxlength.fn(this.descriptionMaxLength),
+          AppValidators.minlength.fn(this.descriptionMinLength),
         ],
       ],
       firstAirDate: [null],
-      totalSeasonsToDate: [0, [Validators.min(1), Validators.max(9000)]],
-      unspecialCharacters: [''],
+      totalSeasonsToDate: [0, [AppValidators.min.fn(1), AppValidators.max.fn(9000)]],
+      alphanumericCharacters: ['', [AppValidators.alphanumeric.fn]],
     });
   }
 

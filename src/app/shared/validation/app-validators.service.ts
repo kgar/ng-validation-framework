@@ -1,10 +1,11 @@
 import { ValidatorPriority } from './models/validator-priority.enum';
-import { Validators, FormControlName, FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
 import { AppValidator } from './models/app-validator.model';
-import { AppConfigurableValidator } from './models/AppConfigurableValidator';
+import { AppConfigurableValidator } from './models/app-configurable-validator.model';
 import { InvalidTextValidator } from './custom-validators/invalid-text.validator';
 import { TextMustMatchValidator } from './custom-validators/text-must-match.validator';
 import { TextMustMatchArgs } from './custom-validators/text-must-match-args.model';
+import { AlphanumericValidator } from './custom-validators/alphanumeric.validator';
 
 export class AppValidators {
   static required: AppValidator = {
@@ -18,7 +19,7 @@ export class AppValidators {
     name: 'alphanumeric',
     errorMessage: 'Alphanumeric characters only',
     priority: ValidatorPriority.Normal,
-    fn: Validators.pattern(/\w/),
+    fn: AlphanumericValidator,
   };
 
   static minlength: AppConfigurableValidator<number> = {
@@ -41,7 +42,7 @@ export class AppValidators {
       return `Must be at least ${error.min}`;
     },
     priority: ValidatorPriority.Normal,
-    fn: Validators.maxLength,
+    fn: Validators.min,
   };
 
   static max: AppConfigurableValidator<number> = {
@@ -50,7 +51,7 @@ export class AppValidators {
       return `Must be no more than ${error.max}`;
     },
     priority: ValidatorPriority.Normal,
-    fn: Validators.maxLength,
+    fn: Validators.max,
   };
 
   static invalidText: AppConfigurableValidator<string> = {
