@@ -15,13 +15,7 @@ export class ValidatedControlComponent extends ValidatedComponentBase implements
   @Input() label = undefined;
   @Input() labelFor = '';
   @Input() useLabelAndErrorIconProps = true;
-  @Input() set forceValidationDecoration(val: boolean) {
-    if (val) {
-      this.control?.control.setErrors({ validatedControlForcedError: true });
-    } else {
-      this.control?.control.setErrors(null);
-    }
-  }
+
 
   public get errorMessage() {
     if (this.control?.errors?.validatedControlForcedError) {
@@ -32,7 +26,7 @@ export class ValidatedControlComponent extends ValidatedComponentBase implements
   }
 
   public get showError() {
-    return this.forceValidationDecoration || super.shouldShowError(this.control);
+    return super.shouldShowError(this.control);
   }
 
   constructor(vs: ValidationService, private ref: ElementRef) {

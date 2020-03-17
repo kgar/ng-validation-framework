@@ -6,6 +6,7 @@ import { InvalidTextValidator } from './custom-validators/invalid-text.validator
 import { TextMustMatchValidator } from './custom-validators/text-must-match.validator';
 import { TextMustMatchArgs } from './custom-validators/text-must-match-args.model';
 import { AlphanumericValidator } from './custom-validators/alphanumeric.validator';
+import { ManualValidator, ManualValidatorArgs } from './custom-validators/manual.validator';
 
 export class AppValidators {
   static required: AppValidator = {
@@ -70,5 +71,12 @@ export class AppValidators {
     },
     fn: TextMustMatchValidator,
     priority: ValidatorPriority.Normal,
+  };
+
+  static manual: AppConfigurableValidator<ManualValidatorArgs> = {
+    name: 'manual',
+    errorMessage: '',
+    fn: ManualValidator,
+    priority: ValidatorPriority.Lowest
   };
 }

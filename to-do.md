@@ -1,4 +1,7 @@
 # To Do 📃
+- Figure out how to make group validation cleaner.
+  - Create a helper that takes whatever is needed and abstracts this part away.
+  - Should the helper go in the validation service, or should it be its own thing?
 - Make a shared component with its own formgroup
   - Add a form model
   - Add a form service and compose validation
@@ -26,10 +29,18 @@
 
 # Notes 📝
 
+## Validation Grouping
+Because form group validation doesn't come stocked with the ability to decorate child controls when the form itself is invalid, I had to come up with the concept of a manual validator.
+Currently, it only supports one instance of manual validation on the control at a time. 
+❓ How do we set up multiple manual validation scenarios for one input?
+
 ## Nested form groups
 I've read various Medium articles on how to share components that have validation rules built in.
-Some of the options available:
-- 
+Some of the options available: 
+- Pass the relevant form group down and let the child work with that
+- Have the child declare their own form group and have the parent dynamically tack it on
+- Use control value accessors
+- ...
 
 ## Composing validation
 The right way and the simplest way are sometimes one and the same. I took the simplest approach by making an AppValidators static class with static props that represent the canned validators, their default error messages, their priority, and their ValidatorFn for reactive forms.

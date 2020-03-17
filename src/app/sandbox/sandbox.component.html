@@ -8,7 +8,6 @@
     <app-validated-control
       label="Name"
       labelFor="name"
-      [forceValidationDecoration]="formGroup?.errors?.kingOfTheHillAnime"
     >
       <input kendoTextBox formControlName="name" id="name" />
     </app-validated-control>
@@ -19,7 +18,6 @@
     <app-validated-control
       label="Animation Type"
       #animationTypeValidation
-      [forceValidationDecoration]="formGroup?.errors?.kingOfTheHillAnime"
     >
       <div validation-label>
         <label for="anime">Look at my custom label (click me for Anime 😉)</label>

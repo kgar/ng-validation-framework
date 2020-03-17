@@ -25,10 +25,6 @@ export class ValidationService {
       const currentSummary = this.getValidator(key, customValidators);
 
       if (currentSummary === undefined) {
-        console.error(
-          'This validation error was not included in the application validators. No custom message can be found.',
-          key,
-        );
         return;
       }
 
@@ -37,10 +33,10 @@ export class ValidationService {
         return;
       }
 
-      highestPriorityError = [currentSummary, highestPriorityError].reduce(
-        entry => (entry.priority > highestPriorityError.priority ? entry : highestPriorityError),
-        highestPriorityError,
-      );
+      highestPriorityError =
+        currentSummary.priority > highestPriorityError.priority
+          ? currentSummary
+          : highestPriorityError;
     });
 
     return highestPriorityError;

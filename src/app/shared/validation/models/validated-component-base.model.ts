@@ -22,6 +22,11 @@ export class ValidatedComponentBase {
     }
 
     const topError = this.vs.getHighestPriorityValidator(directive.errors, this.customValidators);
+
+    if (!topError) {
+      return '';
+    }
+
     const customErrorMessage = this.customValidationMessages[topError.name];
     const errorMessage =
       customErrorMessage !== undefined

@@ -7,17 +7,27 @@ import { KingOfTheHillAnimeValidatorFn } from './koth-anime.validator';
 @Injectable()
 export class SandboxFormService {
   formGroup: FormGroup;
+  kingOfTheHillIsValid = true;
 
   constructor(fb: FormBuilder) {
     const kingOfTheHillValidator = KingOfTheHillAnimeValidatorFn(() => this.formGroup);
+
+    const kingOfTheHillControlsValidator = AppValidators.manual.fn({
+      isValidCallback: () => this.kingOfTheHillIsValid,
+      validationErrorKey: 'test',
+    });
 
     this.formGroup = fb.group(
       {
         name: [
           '',
-          [AppValidators.required.fn, AppValidators.minlength.fn(2)],
+          [
+            AppValidators.required.fn,
+            AppValidators.minlength.fn(2),
+            kingOfTheHillControlsValidator,
+          ],
         ],
-        animationType: ['', AppValidators.required.fn],
+        animationType: ['', [AppValidators.required.fn, kingOfTheHillControlsValidator]],
         description: [
           'Description here.',
           [
@@ -31,6 +41,12 @@ export class SandboxFormService {
       },
       { validators: [kingOfTheHillValidator] },
     );
+
+    this.formGroup.statusChanges.subscribe(() => {
+      this.kingOfTheHillIsValid = !this.formGroup.errors?.kingOfTheHillAnime;
+      this.formGroup.get('name').updateValueAndValidity({ onlySelf: true });
+      this.formGroup.get('animationType').updateValueAndValidity({ onlySelf: true });
+    });
   }
 
   public get descriptionMinLength() {
