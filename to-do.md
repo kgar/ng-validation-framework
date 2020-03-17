@@ -26,12 +26,10 @@
 
 # Notes 📝
 
-## Composing/providing validation
+## Nested form groups
+I've read various Medium articles on how to share components that have validation rules built in.
+Some of the options available:
+- 
 
-Composing metadata for existing validation services is in one place, but it is still a bit messy and accidental.
-
-Composing metadata for new custom services is not yet implemented, but I can see it being much messier still.
-
-I need a solution where individual validators can register with a central store or map. They would provide the validation function and the full validation summary object.
-
-This needs to scale in a distributed way where adding new stuff is simple.
+## Composing validation
+The right way and the simplest way are sometimes one and the same. I took the simplest approach by making an AppValidators static class with static props that represent the canned validators, their default error messages, their priority, and their ValidatorFn for reactive forms.
