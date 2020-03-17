@@ -1,15 +1,22 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SandboxForm } from './sandbox-form.model';
 import { AppValidators } from '../shared/validation/app-validators.service';
 import { KingOfTheHillAnimeValidatorFn } from './koth-anime.validator';
+import { Subscription } from 'rxjs';
+import { FormService } from '../shared/validation/models/form-service.model';
 
 @Injectable()
-export class SandboxFormService {
+export class SandboxFormService implements FormService {
   formGroup: FormGroup;
   kingOfTheHillIsValid = true;
+  formSubscriptions$: Subscription;
 
-  constructor(fb: FormBuilder) {
+  constructor(private fb: FormBuilder) {}
+
+  public init() {
+    console.log('initializing sandbox form');
+
     const kingOfTheHillValidator = KingOfTheHillAnimeValidatorFn(() => this.formGroup);
 
     const kingOfTheHillControlsValidator = AppValidators.manual.fn({
@@ -17,7 +24,7 @@ export class SandboxFormService {
       validationErrorKey: 'test',
     });
 
-    this.formGroup = fb.group(
+    this.formGroup = this.fb.group(
       {
         name: [
           '',
@@ -42,7 +49,8 @@ export class SandboxFormService {
       { validators: [kingOfTheHillValidator] },
     );
 
-    this.formGroup.statusChanges.subscribe(() => {
+    this.formSubscriptions$ = this.formGroup.statusChanges.subscribe(() => {
+      console.log('sandbox form group status change');
       this.kingOfTheHillIsValid = !this.formGroup.errors?.kingOfTheHillAnime;
       this.formGroup.get('name').updateValueAndValidity({ onlySelf: true });
       this.formGroup.get('animationType').updateValueAndValidity({ onlySelf: true });
@@ -67,5 +75,10 @@ export class SandboxFormService {
 
   public patch(model: SandboxForm) {
     this.formGroup.patchValue(model);
+  }
+
+  dispose(): void {
+    console.log('disposing sandbox form');
+    this.formSubscriptions$?.unsubscribe();
   }
 }

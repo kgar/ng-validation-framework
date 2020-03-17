@@ -13,10 +13,11 @@ import { SandboxFormService } from './sandbox/sandbox-form.service';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { ValidationModule } from './shared/validation/validation.module';
 import { TooltipModule } from '@progress/kendo-angular-tooltip';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
-  declarations: [AppComponent, SandboxComponent],
+  declarations: [AppComponent, SandboxComponent, HomeComponent],
   imports: [
     ValidationModule,
     BrowserModule,

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faInfoCircle, faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
 import { SandboxFormService } from './sandbox-form.service';
 import { CustomValidationErrorMessages } from '../shared/validation/models/custom-validation-error-messages.model';
@@ -9,7 +9,7 @@ import { KingOfTheHillAnimeValidator } from './koth-anime.validator';
   templateUrl: './sandbox.component.html',
   styleUrls: ['./sandbox.component.scss'],
 })
-export class SandboxComponent implements OnInit {
+export class SandboxComponent implements OnInit, OnDestroy {
   faInfoCircle = faInfoCircle;
   faPizzaSlice = faPizzaSlice;
   customFormValidators = [KingOfTheHillAnimeValidator];
@@ -31,7 +31,14 @@ export class SandboxComponent implements OnInit {
 
   constructor(public formService: SandboxFormService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.formService.init();
+  }
+
+  ngOnDestroy(): void {
+    console.log('sandbox destroyed!');
+    this.formService.dispose();
+  }
 
   onSubmit() {
     this.formService.formGroup.markAllAsTouched();

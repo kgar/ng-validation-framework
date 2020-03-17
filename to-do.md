@@ -1,4 +1,7 @@
 # To Do 📃
+- Determine if observable subscriptions need to be unsubscribed from
+  - Then unsubscribe.
+- Create Angular library for the validation module and separate the deployable stuff into its own
 - Figure out how to make group validation cleaner.
   - Create a helper that takes whatever is needed and abstracts this part away.
   - Should the helper go in the validation service, or should it be its own thing?
