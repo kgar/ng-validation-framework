@@ -1,15 +1,6 @@
 # To Do 📃
-- Plug in the component to the sandbox in multiple places, nested under different circumstances
-  - In one place, add a validation rule
-  - In another place, reset the validation rules altogether
 - Solve nested forms in the simplest way that is still maintainable / scalable / reusable 😬
-- Validator registration: need order, message, and ValidatorFn registered with the validator store
-  - Determine where to put validation summaries for custom validators
-  - Determine where to put validation summaries for built-in validators
-- Add a custom validator where name cannot be "Sideshow Bob" and configure with new configuration strategy
-  - Is this scalable?
-- (Ongoing) Solve sandbox scenarios
-- Add Kendo UI with the Bootstrap theme
+- Solve this: Can async validation be conducted only at form submission time?
 - Add open sans regular, semibold, and bold
 - Set up open sans as the main font
 - Apply some basic styles globally and then use in the validation control component for structuring the content
@@ -29,6 +20,18 @@ I would've made helpers to layer on these additional validation scenarios, but A
 Until I get some time to collaborate with fellow devs on how to clean it up, it'll just be hardcoded and clunky.
 Not the end of the world, I guess.
 
+## Custom trigger for async validation
+I get that Angular provides ways to adjust when to update validation, but even then, async validation updating on keyup or blur is still so wasteful. 
+Also, being unable to specify updateOn for a specific validator is unfortunate.
+So, I want to perform async validation on an attempted form submit. To make this work, I'm going to have to do something like manual validation, like ActivatedAsyncValidation. I need to be able to just trigger async validation during a form submission.
+There are 2 parts to this challenge:
+1. Waiting for status to be something other than "pending" (one way to do it: https://stackoverflow.com/a/52191003/1902445)
+2. Triggering async validation for the duration of the submission process
+  - I'm thinking of implementing an ActivatedValidator of T, where T is an async validator
+  - The ActivatedValidator part will feed Success observable results until told to enforce the async validator
+  - The code would activate the validator and then request an update to status / validity
+  - After this, use the technique in part 1 to wait for something other than "pending". Once no longer pending, deactivate the activated validator but don't update validity. The user will do it and dismiss the message.
+
 ## Nested form groups
 I've read various Medium articles on how to share components that have validation rules built in.
 Some of the options available: 
@@ -36,6 +39,7 @@ Some of the options available:
 - Have the child declare their own form group and have the parent dynamically tack it on
 - Use control value accessors
 - ...
+I ended up going with @Input() formGroup: FormGroup. I made it so the shared component doesn't care whether the form group is nested or not. The main form group could directly reference properties and pass itself, or the parent form could send down a nested formgroup dedicated only to the shared component. This simplified things quite a bit.
 
 ## Composing validation
 The right way and the simplest way are sometimes one and the same. I took the simplest approach by making an AppValidators static class with static props that represent the canned validators, their default error messages, their priority, and their ValidatorFn for reactive forms.
