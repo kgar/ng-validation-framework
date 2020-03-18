@@ -9,19 +9,20 @@ import { FormService } from '../shared/validation/models/form-service.model';
 @Injectable()
 export class SandboxFormService implements FormService {
   formGroup: FormGroup;
+
+  kingOfTheHillValidator = KingOfTheHillAnimeValidatorFn;
   kingOfTheHillIsValid = true;
+  kingOfTheHillControlsManualValidator = AppValidators.manual.fn({
+    isValidCallback: () => this.kingOfTheHillIsValid,
+    validationErrorKey: 'kingOfTheHillIsAnime',
+  });
+
   formSubscriptions$: Subscription;
 
   constructor(private fb: FormBuilder) {}
 
   public init() {
     console.log('initializing sandbox form');
-
-    const kingOfTheHillValidator = KingOfTheHillAnimeValidatorFn(() => this.formGroup);
-    const kingOfTheHillControlsManualValidator = AppValidators.manual.fn({
-      isValidCallback: () => this.kingOfTheHillIsValid,
-      validationErrorKey: 'kingOfTheHillIsAnime',
-    });
 
     this.formGroup = this.fb.group(
       {
@@ -30,10 +31,10 @@ export class SandboxFormService implements FormService {
           [
             AppValidators.required.fn,
             AppValidators.minlength.fn(2),
-            kingOfTheHillControlsManualValidator,
+            this.kingOfTheHillControlsManualValidator,
           ],
         ],
-        animationType: ['', [AppValidators.required.fn, kingOfTheHillControlsManualValidator]],
+        animationType: ['', [AppValidators.required.fn, this.kingOfTheHillControlsManualValidator]],
         description: [
           'Description here.',
           [
@@ -45,7 +46,7 @@ export class SandboxFormService implements FormService {
         totalSeasonsToDate: [0, [AppValidators.min.fn(1), AppValidators.max.fn(9000)]],
         alphanumericCharacters: ['', [AppValidators.alphanumeric.fn]],
       },
-      { validators: [kingOfTheHillValidator] },
+      { validators: [this.kingOfTheHillValidator] },
     );
 
     this.formSubscriptions$ = this.formGroup.statusChanges.subscribe(() => {

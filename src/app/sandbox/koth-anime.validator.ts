@@ -1,27 +1,25 @@
-import { FormGroup } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { SandboxForm } from './sandbox-form.model';
 import { ValidatorPriority } from '../shared/validation/models/validator-priority.enum';
-import { AppConfigurableValidator } from '../shared/validation/models/app-configurable-validator.model';
+import { AppValidator } from '../shared/validation/models/app-validator.model';
 
-type FormGroupProvider = () => FormGroup;
+export function KingOfTheHillAnimeValidatorFn(
+  formGroup: AbstractControl,
+): { [key: string]: any } | null {
+  const formModel = formGroup?.value as SandboxForm;
 
-export function KingOfTheHillAnimeValidatorFn(formGroupProvider: FormGroupProvider) {
-  return (): { [key: string]: any } | null => {
-    const formModel = formGroupProvider()?.value as SandboxForm;
+  if (formModel === undefined) {
+    return;
+  }
 
-    if (formModel === undefined) {
-      return;
-    }
+  const containsInvalidCombination =
+    formModel.name?.toLocaleLowerCase()?.trim() === 'king of the hill' &&
+    formModel.animationType !== 'anime';
 
-    const containsInvalidCombination =
-      formModel.name?.toLocaleLowerCase()?.trim() === 'king of the hill' &&
-      formModel.animationType !== 'anime';
-
-    return containsInvalidCombination ? { kingOfTheHillAnime: true } : null;
-  };
+  return containsInvalidCombination ? { kingOfTheHillAnime: true } : null;
 }
 
-export const KingOfTheHillAnimeValidator: AppConfigurableValidator<FormGroupProvider> = {
+export const KingOfTheHillAnimeValidator: AppValidator = {
   name: 'kingOfTheHillAnime',
   errorMessage: 'King of the Hill is an anime',
   fn: KingOfTheHillAnimeValidatorFn,
