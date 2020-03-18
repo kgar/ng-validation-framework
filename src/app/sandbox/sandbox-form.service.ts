@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SandboxForm } from './sandbox-form.model';
 import { AppValidators } from '../shared/validation/app-validators.service';
 import { KingOfTheHillAnimeValidatorFn } from './koth-anime.validator';
@@ -23,8 +23,6 @@ export class SandboxFormService implements FormService {
   constructor(private fb: FormBuilder) {}
 
   public init() {
-    console.log('initializing sandbox form');
-
     this.formGroup = this.fb.group(
       {
         name: [
@@ -43,8 +41,21 @@ export class SandboxFormService implements FormService {
             AppValidators.minlength.fn(this.descriptionMinLength),
           ],
         ],
-        firstAirDate: [null],
-        totalSeasonsToDate: [0, ShowRunInfoValidators.totalSeasonsToDateValidators],
+        currentShowRunInfo: this.fb.group({
+          firstAirDate: [null, AppValidators.required.fn],
+          totalSeasonsToDate: [0, ShowRunInfoValidators.totalSeasonsToDateValidators],
+        }),
+        nextShowRunInfo: this.fb.group({
+          firstAirDate: [new Date()],
+          totalSeasonsToDate: [
+            null,
+            [...ShowRunInfoValidators.totalSeasonsToDateValidators, AppValidators.required.fn],
+          ],
+        }),
+        imaginaryShowRunInfo: this.fb.group({
+          firstAirDate: [new Date('1/30/2048')],
+          totalSeasonsToDate: [0],
+        }),
         alphanumericCharacters: ['', [AppValidators.alphanumeric.fn]],
       },
       { validators: [this.kingOfTheHillValidator] },
@@ -63,6 +74,18 @@ export class SandboxFormService implements FormService {
 
   public get descriptionMaxLength() {
     return 300;
+  }
+
+  public get currentShowRunInfo(): FormGroup {
+    return this.formGroup.get('currentShowRunInfo') as FormGroup;
+  }
+
+  public get nextShowRunInfo(): FormGroup {
+    return this.formGroup.get('nextShowRunInfo') as FormGroup;
+  }
+
+  public get imaginaryShowRunInfo(): FormGroup {
+    return this.formGroup.get('imaginaryShowRunInfo') as FormGroup;
   }
 
   public getForm(): SandboxForm {

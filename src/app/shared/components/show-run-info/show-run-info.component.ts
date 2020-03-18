@@ -9,7 +9,7 @@ import { ShowRunInfoForm } from './show-run-info-form.model';
   styleUrls: ['./show-run-info.component.scss']
 })
 export class ShowRunInfoComponent implements OnInit {
-  @Input() parentForm: FormGroup;
+  @Input() formGroup: FormGroup;
   seasonErrorMessages: CustomValidationErrorMessages = {
     min: error => `Must be at least ${error.min} season(s)`,
     max: error => `Must be no more than ${error.max} seasons`,
@@ -22,6 +22,6 @@ export class ShowRunInfoComponent implements OnInit {
 
   setFirstAirDateToToday() {
     const modelPatch: ShowRunInfoForm = { firstAirDate: new Date() };
-    this.parentForm.patchValue(modelPatch);
+    this.formGroup.patchValue(modelPatch);
   }
 }

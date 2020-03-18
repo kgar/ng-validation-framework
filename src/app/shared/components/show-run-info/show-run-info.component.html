@@ -1,4 +1,4 @@
-<ng-container [formGroup]="parentForm">
+<ng-container [formGroup]="formGroup">
   <app-validated-control label="First Air Date">
     <kendo-datepicker formControlName="firstAirDate"></kendo-datepicker>
     <button type="button" (click)="setFirstAirDateToToday()" kendoButton>Today</button>

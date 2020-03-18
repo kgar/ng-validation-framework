@@ -30,7 +30,6 @@ export class SandboxComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    console.log('sandbox destroyed!');
     this.formService.dispose();
   }
 

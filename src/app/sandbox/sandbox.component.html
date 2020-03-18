@@ -39,9 +39,20 @@
         style="color: #C8154F; margin-left: 0.5em"
       ></fa-icon>
     </app-validated-control>
-
-    <app-show-run-info [parentForm]="formGroup"></app-show-run-info>
-
+    <div class="show-run-container">
+      <div>
+        <p>Show Run Info</p>
+        <app-show-run-info [formGroup]="formService.currentShowRunInfo"></app-show-run-info>
+      </div>
+      <div>
+        <p>Show Run Info for whatever is up next</p>
+        <app-show-run-info [formGroup]="formService.nextShowRunInfo"></app-show-run-info>
+      </div>
+      <div>
+        <p>Show Run Info for an imaginery future show (no validation rules!)</p>
+        <app-show-run-info [formGroup]="formService.imaginaryShowRunInfo"></app-show-run-info>
+      </div>
+    </div>
     <app-validated-control
       label="Show Description"
       [useValidationMessages]="false"
@@ -95,7 +106,7 @@
   </form>
 </app-validated-form-group>
 
-<h2>Form Group Validation Props</h2>
+<p>Form Group Validation Props</p>
 <p *ngIf="formGroup">
   Status: {{ formGroup.status }}<br />
   Value: {{ formGroup.value | json }}<br />

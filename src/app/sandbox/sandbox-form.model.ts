@@ -1,10 +1,11 @@
 import { ShowRunInfoForm } from '../shared/components/show-run-info/show-run-info-form.model';
 
-export interface SandboxForm extends ShowRunInfoForm {
+export interface SandboxForm {
   name?: string;
   animationType?: string;
   description?: string;
-  firstAirDate?: Date;
-  totalSeasonsToDate?: number;
+  currentShowRunInfo?: ShowRunInfoForm;
+  nextShowRunInfo?: ShowRunInfoForm;
+  imaginaryShowRunInfo?: ShowRunInfoForm;
   alphanumericCharacters?: string;
 }
