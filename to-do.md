@@ -1,10 +1,5 @@
 # To Do 📃
 - Try this: Make async validation occur only at form submission time
-  - class ActivatedValidator implements AsyncValidator
-    - Activate() -> sets boolean to allow enforcing async validation
-    - Deactive() -> sets boolean to return success
-    - static of(asyncValidator) -> creates an instance of ActivatedValidator with the specified async validator
-    - ...AsyncValidator members as decorators around the stored AsyncValidator
   - Create service that creates observable to await pending validation until it's either valid or invalid
   - Upgrade the KingOfTheHillValidator to be async
   - Put the KingOfTheHillValidator in an ActivatedValidator and use as AsyncValidator in formgroup
