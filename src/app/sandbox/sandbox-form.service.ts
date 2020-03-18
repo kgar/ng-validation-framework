@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SandboxForm } from './sandbox-form.model';
 import { AppValidators } from '../shared/validation/app-validators.service';
 import { KingOfTheHillAnimeValidatorFn } from './koth-anime.validator';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable, of } from 'rxjs';
 import { FormService } from '../shared/validation/models/form-service.model';
 import { ShowRunInfoValidators } from '../shared/components/show-run-info/show-run-info-validators.model';
 
@@ -66,6 +66,12 @@ export class SandboxFormService implements FormService {
       this.formGroup.get('name').updateValueAndValidity({ onlySelf: true });
       this.formGroup.get('animationType').updateValueAndValidity({ onlySelf: true });
     });
+  }
+
+  public submit(): Observable<boolean> {
+    this.formGroup.markAllAsTouched();
+
+    return of(this.formGroup.valid);
   }
 
   public get descriptionMinLength() {

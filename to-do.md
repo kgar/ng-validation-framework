@@ -1,7 +1,5 @@
 # To Do 📃
 - Try this: Make async validation occur only at form submission time
-  - Add to the form service interface: submit(): Observable of boolean
-  - Set a label that tells the result of the attempted submission
   - class ActivatedValidator implements AsyncValidator
     - Activate() -> sets boolean to allow enforcing async validation
     - Deactive() -> sets boolean to return success

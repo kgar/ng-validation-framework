@@ -34,13 +34,11 @@ export class SandboxComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    this.formService.formGroup.markAllAsTouched();
-
-    if (!this.formService.formGroup.valid) {
-      return;
-    }
-
-    alert('You did it!');
+    this.formService.submit().subscribe(success => {
+      if (success) {
+        alert('You did it!');
+      }
+    });
   }
 
   deselectAnimationType() {
