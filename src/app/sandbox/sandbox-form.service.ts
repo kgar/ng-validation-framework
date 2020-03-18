@@ -18,10 +18,9 @@ export class SandboxFormService implements FormService {
     console.log('initializing sandbox form');
 
     const kingOfTheHillValidator = KingOfTheHillAnimeValidatorFn(() => this.formGroup);
-
-    const kingOfTheHillControlsValidator = AppValidators.manual.fn({
+    const kingOfTheHillControlsManualValidator = AppValidators.manual.fn({
       isValidCallback: () => this.kingOfTheHillIsValid,
-      validationErrorKey: 'test',
+      validationErrorKey: 'kingOfTheHillIsAnime',
     });
 
     this.formGroup = this.fb.group(
@@ -31,10 +30,10 @@ export class SandboxFormService implements FormService {
           [
             AppValidators.required.fn,
             AppValidators.minlength.fn(2),
-            kingOfTheHillControlsValidator,
+            kingOfTheHillControlsManualValidator,
           ],
         ],
-        animationType: ['', [AppValidators.required.fn, kingOfTheHillControlsValidator]],
+        animationType: ['', [AppValidators.required.fn, kingOfTheHillControlsManualValidator]],
         description: [
           'Description here.',
           [
@@ -50,7 +49,6 @@ export class SandboxFormService implements FormService {
     );
 
     this.formSubscriptions$ = this.formGroup.statusChanges.subscribe(() => {
-      console.log('sandbox form group status change');
       this.kingOfTheHillIsValid = !this.formGroup.errors?.kingOfTheHillAnime;
       this.formGroup.get('name').updateValueAndValidity({ onlySelf: true });
       this.formGroup.get('animationType').updateValueAndValidity({ onlySelf: true });
@@ -78,7 +76,6 @@ export class SandboxFormService implements FormService {
   }
 
   dispose(): void {
-    console.log('disposing sandbox form');
     this.formSubscriptions$?.unsubscribe();
   }
 }

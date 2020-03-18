@@ -1,10 +1,5 @@
 # To Do 📃
-- Determine if observable subscriptions need to be unsubscribed from
-  - Then unsubscribe.
-- Create Angular library for the validation module and separate the deployable stuff into its own
-- Figure out how to make group validation cleaner.
-  - Create a helper that takes whatever is needed and abstracts this part away.
-  - Should the helper go in the validation service, or should it be its own thing?
+- Figure out how to make group validation cleaner, if possible
 - Make a shared component with its own formgroup
   - Add a form model
   - Add a form service and compose validation
@@ -34,8 +29,11 @@
 
 ## Validation Grouping
 Because form group validation doesn't come stocked with the ability to decorate child controls when the form itself is invalid, I had to come up with the concept of a manual validator.
-Currently, it only supports one instance of manual validation on the control at a time. 
-❓ How do we set up multiple manual validation scenarios for one input?
+I can roll out as many of these manual validators as I want, provided they each use a unique key.
+The downside is that it's a bit of a RTFM situation; I'll need to document how to do this on our wikis.
+I would've made helpers to layer on these additional validation scenarios, but Angular has specifically made it impossible to add new validators dynamically, so only one helper could ever work at a time, unless I do something weird like return a new array of the current validators for each of the controls that are validated as a group, and that borders on being even less maintainable than just hardcoding the whole thing.
+Until I get some time to collaborate with fellow devs on how to clean it up, it'll just be hardcoded and clunky.
+Not the end of the world, I guess.
 
 ## Nested form groups
 I've read various Medium articles on how to share components that have validation rules built in.
@@ -47,3 +45,6 @@ Some of the options available:
 
 ## Composing validation
 The right way and the simplest way are sometimes one and the same. I took the simplest approach by making an AppValidators static class with static props that represent the canned validators, their default error messages, their priority, and their ValidatorFn for reactive forms.
+
+## Making a library
+I considered making an angular library and packaging it up with a local NPM feed at work, but for the medium term, I'm going to just plug it in. It relies on FontAwesome and style guide theming. None of this has been packaged out yet for the lib and the consumer to share, so it would result in hardcoded colors, etc. There, it's punted.
