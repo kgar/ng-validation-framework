@@ -1,6 +1,16 @@
 # To Do 📃
-- Solve nested forms in the simplest way that is still maintainable / scalable / reusable 😬
-- Solve this: Can async validation be conducted only at form submission time?
+- Try this: Make async validation occur only at form submission time
+  - Add to the form service interface: submit(): Observable of boolean
+  - Set a label that tells the result of the attempted submission
+  - class ActivatedValidator implements AsyncValidator
+    - Activate() -> sets boolean to allow enforcing async validation
+    - Deactive() -> sets boolean to return success
+    - static of(asyncValidator) -> creates an instance of ActivatedValidator with the specified async validator
+    - ...AsyncValidator members as decorators around the stored AsyncValidator
+  - Create service that creates observable to await pending validation until it's either valid or invalid
+  - Upgrade the KingOfTheHillValidator to be async
+  - Put the KingOfTheHillValidator in an ActivatedValidator and use as AsyncValidator in formgroup
+  - Update submit() to activate validators, update validity of the form, create observable of awaiting validation, and return success or failure of form submission
 - Add open sans regular, semibold, and bold
 - Set up open sans as the main font
 - Apply some basic styles globally and then use in the validation control component for structuring the content
