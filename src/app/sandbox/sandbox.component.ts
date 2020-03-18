@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faInfoCircle, faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
 import { SandboxFormService } from './sandbox-form.service';
-import { CustomValidationErrorMessages } from '../shared/validation/models/custom-validation-error-messages.model';
 import { KingOfTheHillAnimeValidator } from './koth-anime.validator';
 
 @Component({
@@ -23,11 +22,6 @@ export class SandboxComponent implements OnInit, OnDestroy {
       .value as string).length;
     return this.formService.descriptionMaxLength - descriptionCharacterCount;
   }
-
-  seasonErrorMessages: CustomValidationErrorMessages = {
-    min: error => `Must be at least ${error.min} season(s)`,
-    max: error => `Must be no more than ${error.max} seasons`,
-  };
 
   constructor(public formService: SandboxFormService) {}
 
@@ -52,9 +46,5 @@ export class SandboxComponent implements OnInit, OnDestroy {
 
   deselectAnimationType() {
     this.formService.patch({ animationType: '' });
-  }
-
-  setFirstAirDateToToday() {
-    this.formService.patch({ firstAirDate: new Date() });
   }
 }

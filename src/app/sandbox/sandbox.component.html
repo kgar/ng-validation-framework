@@ -5,20 +5,14 @@
   [useValidationMessages]="false"
 >
   <form [formGroup]="formService.formGroup" (ngSubmit)="onSubmit()">
-    <app-validated-control
-      label="Name"
-      labelFor="name"
-    >
+    <app-validated-control label="Name" labelFor="name">
       <input kendoTextBox formControlName="name" id="name" />
     </app-validated-control>
 
     <div>
       Sample of custom validation label template / custom validation error icon and icon placement
     </div>
-    <app-validated-control
-      label="Animation Type"
-      #animationTypeValidation
-    >
+    <app-validated-control label="Animation Type" #animationTypeValidation>
       <div validation-label>
         <label for="anime">Look at my custom label (click me for Anime 😉)</label>
       </div>
@@ -46,17 +40,7 @@
       ></fa-icon>
     </app-validated-control>
 
-    <app-validated-control label="First Air Date">
-      <kendo-datepicker formControlName="firstAirDate"></kendo-datepicker>
-      <button type="button" (click)="setFirstAirDateToToday()" kendoButton>Today</button>
-    </app-validated-control>
-
-    <app-validated-control
-      label="Total Seasons To Date"
-      [customValidationMessages]="seasonErrorMessages"
-    >
-      <kendo-numerictextbox formControlName="totalSeasonsToDate" format="#"></kendo-numerictextbox>
-    </app-validated-control>
+    <app-show-run-info [parentForm]="formGroup"></app-show-run-info>
 
     <app-validated-control
       label="Show Description"

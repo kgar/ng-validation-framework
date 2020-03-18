@@ -5,6 +5,7 @@ import { AppValidators } from '../shared/validation/app-validators.service';
 import { KingOfTheHillAnimeValidatorFn } from './koth-anime.validator';
 import { Subscription } from 'rxjs';
 import { FormService } from '../shared/validation/models/form-service.model';
+import { ShowRunInfoValidators } from '../shared/components/show-run-info/show-run-info-validators.model';
 
 @Injectable()
 export class SandboxFormService implements FormService {
@@ -43,7 +44,7 @@ export class SandboxFormService implements FormService {
           ],
         ],
         firstAirDate: [null],
-        totalSeasonsToDate: [0, [AppValidators.min.fn(1), AppValidators.max.fn(9000)]],
+        totalSeasonsToDate: [0, ShowRunInfoValidators.totalSeasonsToDateValidators],
         alphanumericCharacters: ['', [AppValidators.alphanumeric.fn]],
       },
       { validators: [this.kingOfTheHillValidator] },

@@ -1,10 +1,4 @@
 # To Do 📃
-- Figure out how to make group validation cleaner, if possible
-- Make a shared component with its own formgroup
-  - Add a form model
-  - Add a form service and compose validation
-  - Ensure it initializes with empty data to begin with
-  - Expose an input for the form group
 - Plug in the component to the sandbox in multiple places, nested under different circumstances
   - In one place, add a validation rule
   - In another place, reset the validation rules altogether
