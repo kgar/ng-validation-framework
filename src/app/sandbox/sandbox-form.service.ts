@@ -71,7 +71,7 @@ export class SandboxFormService extends FormServiceBase {
     this.formSubscriptions.push(subscription);
   }
 
-  protected validateAsync(): Observable<boolean> {
+  protected validateAsync(): Observable<any> {
     return this.kingOfTheHillValidationService
       .validate(this.formGroup.get('name').value, this.formGroup.get('animationType').value)
       .pipe(
@@ -83,9 +83,10 @@ export class SandboxFormService extends FormServiceBase {
           );
         }),
       );
-  };
+  }
 
   protected save() {
+    // simulated save event
     return of(true).pipe(tap(() => console.log('Successfully saved!')));
   }
 

@@ -3,6 +3,11 @@ import { FormBuilder, AbstractControlOptions, ValidatorFn, AsyncValidatorFn } fr
 import { MappedAbstractControlConfig } from '../models/mapped-abstract-control-config.model';
 
 @Injectable()
+/**
+ * A decorator for the Angular FormBuilder service which allows for
+ * the creation of form groups / arrays / controls that adhere to
+ * a TypeScript interface.
+ */
 export class MappedFormBuilder {
   constructor(private formBuilder: FormBuilder) {}
 
