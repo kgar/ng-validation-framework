@@ -6,6 +6,7 @@ import { ValidationErrorIconComponent } from './components/validation-error-icon
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MappedFormBuilder } from './services/mapped-form-builder.service';
+import { ErrorMessageComponent } from './components/error-message/error-message.component';
 
 @NgModule({
   providers: [MappedFormBuilder],
@@ -13,6 +14,7 @@ import { MappedFormBuilder } from './services/mapped-form-builder.service';
     ValidatedControlComponent,
     ValidationErrorIconComponent,
     ValidatedFormGroupComponent,
+    ErrorMessageComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule],
   exports: [ValidatedControlComponent, ValidationErrorIconComponent, ValidatedFormGroupComponent],

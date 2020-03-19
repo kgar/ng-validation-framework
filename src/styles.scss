@@ -64,30 +64,26 @@ textarea {
 }
 
 // Validation styles; TODO: move to own module
-.validation-error-message {
+.vf-validation-error-message {
   color: $magenta;
 }
 
-fa-icon.validation-error {
-  color: $magenta;
+fa-icon.vf-error-icon {
+  @extend .vf-validation-error-message;
   margin-left: 0.5em;
 }
 
-input.validation-error,
 input.ng-invalid.ng-touched,
-textarea.validation-error,
 textarea.ng-invalid.ng-touched {
   border-color: $magenta;
 }
 
-// Bootstrap-specific
-.validated-control-container {
-  input.validation-error:focus,
+.vf-validated-control-container {
+  input.vf-validation-error:focus,
   input.ng-invalid.ng-touched:focus,
-  textarea.validation-error:focus,
+  textarea.vf-validation-error:focus,
   textarea.ng-invalid.ng-touched:focus {
     border-color: $magenta;
-    box-shadow: 0 0 0 0.2rem $magenta-box-shadow;
   }
 }
 

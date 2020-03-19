@@ -62,7 +62,7 @@
       <div class="description-label-container" kendoTooltip>
         <label for="show-description">Show Description</label>
         <div
-          class="validation-error-message"
+          class="vf-validation-error-message"
           *ngIf="descriptionValidation.showError"
           [title]="descriptionValidation.errorMessage"
         >
@@ -109,7 +109,7 @@
     </p>
     <button type="submit" kendoButton [primary]="true">Submit</button>
 
-    <p class="validation-error-message" *ngIf="sandboxFormGroup.showError">
+    <p class="vf-validation-error-message" *ngIf="sandboxFormGroup.showError">
       {{ sandboxFormGroup.errorMessage }}
     </p>
   </form>

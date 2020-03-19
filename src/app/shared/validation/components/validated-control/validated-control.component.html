@@ -1,10 +1,11 @@
-<div class="validated-control-container" [class.invalid]="showError">
-  <div *ngIf="useLabelAndErrorIconProps">
-    <label class="validated-control-label" [for]="labelFor">{{ label }}</label>
+<div class="vf-validated-control-container" [class.invalid]="showError">
+  <div *ngIf="useLabelAndErrorIconProps" class="vf-label-icon-container">
+    <label class="vf-validated-control-label" [for]="labelFor">{{ label }}</label>
     <app-validation-error-icon *ngIf="showError"></app-validation-error-icon>
   </div>
   <ng-content></ng-content>
-  <div class="validation-error-message" *ngIf="useValidationMessages && showError">
-    {{ errorMessage }}
-  </div>
+  <app-error-message
+    *ngIf="useValidationMessages && showError"
+    [errorMessage]="errorMessage"
+  ></app-error-message>
 </div>

@@ -1,12 +1,13 @@
 # To Do 📃
-- Cut a library and move the validation content to a standalone library
-- Pull the module back into the sandbox
-- Update all class names / selectors for the validation feature to be very specific so that this can be reused on a wide scale.
-  - Selectors: vf-validated-control, vf-error-icon, vf-validation-message, etc.
-  - Class names: Something like vf-state-valid / vf-state-invalid / vf-state-invalid-message / vf-state-invalid
-- Apply some basic styles globally and then use in the validation control component for structuring the content
+- Review the async validation function signatures. 
+  - The boolean in the observable is being ignored, since async validation is expected to handle its own control validation adjustments.
+  - Consider making it a void observable or the rxjs equivalent
+- ...
 - Add open sans regular, semibold, and bold
 - Set up open sans as the main font
+- Trim the remaining scenarios to those that need to be demonstrated
+- Resolve remaining scenarios
+- Clean up the sandbox so it looks less 
 - ...
 
 # Notes 📝
