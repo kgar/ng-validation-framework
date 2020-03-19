@@ -1,11 +1,5 @@
 # To Do 📃
 - Review submit-time AsyncValidation and synchronous validation. Make any to-do's based on refactor opportunities.
-- Would this help or hurt?
-  - Abstract base class for form services
-    - protected formGroup: FormGroup
-    - protected formSubscriptions: Subscription[]
-    - Has dispose() with formSubscriptions being unsubscribed from
-    - ...
 - Refactor, can you make a service that encapsulates group manual validation and leverages the new helpers?
 - Add open sans regular, semibold, and bold
 - Set up open sans as the main font

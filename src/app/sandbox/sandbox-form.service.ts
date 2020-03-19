@@ -11,18 +11,19 @@ import { tap, concatMap } from 'rxjs/operators';
 import { MappedFormBuilder } from '../shared/validation/services/mapped-form-builder.service';
 import { ShowRunInfoForm } from '../shared/components/show-run-info/show-run-info-form.model';
 import { ManualValidationHelpers } from '../shared/validation/services/validation-helpers.service';
+import { FormServiceBase } from '../shared/validation/services/form-service-base.service';
 
 @Injectable()
-export class SandboxFormService implements FormService {
-  private formSubscriptions: Subscription[] = [];
-  public formGroup: FormGroup;
+export class SandboxFormService extends FormServiceBase {
   public customFormValidators = [this.kingOfTheHillValidator.validator];
 
   constructor(
     private fb: MappedFormBuilder,
     private kingOfTheHillValidator: KingOfTheHillManualValidator,
     private kingOfTheHillValidationService: KingOfTheHillValidationService,
-  ) {}
+  ) {
+    super();
+  }
 
   public init() {
     this.formGroup = this.fb.group<SandboxForm>(
@@ -71,17 +72,8 @@ export class SandboxFormService implements FormService {
     this.formSubscriptions.push(subscription);
   }
 
-  // TODO: Figure out how to take away the boilerplate for this
-  public submit(): Observable<boolean> {
-    this.formGroup.markAllAsTouched();
-    this.formGroup.updateValueAndValidity();
-
-    if (!this.formGroup.valid) {
-      return of(false);
-    }
-
-    // TODO: Determine if this can somehow be extracted into a service
-    const asyncValidation$ = this.kingOfTheHillValidationService
+  protected validateAsync(): Observable<boolean> {
+    return this.kingOfTheHillValidationService
       .validate(this.formGroup.get('name').value, this.formGroup.get('animationType').value)
       .pipe(
         tap(isValid => {
@@ -92,19 +84,9 @@ export class SandboxFormService implements FormService {
           );
         }),
       );
+  };
 
-    const submission$ = asyncValidation$.pipe(
-      concatMap(result => {
-        console.log('concat map called', 'result: ', result);
-        console.log('form group validity', this.formGroup.valid);
-        return this.formGroup.valid ? this.save() : of(false);
-      }),
-    );
-
-    return submission$;
-  }
-
-  private save() {
+  protected save() {
     return of(true).pipe(tap(() => console.log('Successfully saved!')));
   }
 
