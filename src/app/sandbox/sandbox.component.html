@@ -99,7 +99,16 @@
       there should be only one validation message below them.
     </p>
 
+    <p class="one-off-tests-panel">
+      <button type="button" kendoButton (click)="kothTest(false)">
+        Run failing King-of-the-hill test
+      </button>
+      <button type="button" kendoButton (click)="kothTest(true)">
+        Run passing King-of-the-hill test
+      </button>
+    </p>
     <button type="submit" kendoButton [primary]="true">Submit</button>
+
     <p class="validation-error-message" *ngIf="sandboxFormGroup.showError">
       {{ sandboxFormGroup.errorMessage }}
     </p>
@@ -114,3 +123,5 @@
   Touched: {{ formGroup.touched }}<br />
   Dirty: {{ formGroup.dirty }}<br />
 </p>
+
+<div *ngIf="isSubmitting" class="k-i-loading"></div>
