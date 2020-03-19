@@ -7,7 +7,6 @@ import { NgControl } from '@angular/forms';
 @Component({
   selector: 'app-validated-control',
   templateUrl: './validated-control.component.html',
-  styleUrls: ['./validated-control.component.scss'],
 })
 export class ValidatedControlComponent extends ValidatedComponentBase implements OnInit {
   faExclamationCircle = faExclamationCircle;

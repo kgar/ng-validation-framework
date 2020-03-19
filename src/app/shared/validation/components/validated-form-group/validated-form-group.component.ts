@@ -5,7 +5,6 @@ import { FormGroupDirective } from '@angular/forms';
 @Component({
   selector: 'app-validated-form-group',
   templateUrl: './validated-form-group.component.html',
-  styleUrls: ['./validated-form-group.component.scss'],
 })
 export class ValidatedFormGroupComponent extends ValidatedComponentBase {
   @ContentChild(FormGroupDirective) formGroup: FormGroupDirective;
