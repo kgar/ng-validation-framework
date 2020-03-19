@@ -1,17 +1,12 @@
 # To Do 📃
-- Refactor, can you make a service that encapsulates group manual validation and leverages the new helpers?
-- Add open sans regular, semibold, and bold
-- Set up open sans as the main font
-- Apply some basic styles globally and then use in the validation control component for structuring the content
-- Add support for validation decoration on basic Kendo controls
-  - This could be already done by Kendo, else a directive may suffice to style Kendo controls as errored.
-- Add hook for customizing error messages
-- Remove magenta box shadows; too much trouble to persist across all inputs
+- Cut a library and move the validation content to a standalone library
+- Pull the module back into the sandbox
 - Update all class names / selectors for the validation feature to be very specific so that this can be reused on a wide scale.
   - Selectors: vf-validated-control, vf-error-icon, vf-validation-message, etc.
   - Class names: Something like vf-state-valid / vf-state-invalid / vf-state-invalid-message / vf-state-invalid
-- Cut a library and move the validation content to a standalone library
-- Pull the module back into the sandbox
+- Apply some basic styles globally and then use in the validation control component for structuring the content
+- Add open sans regular, semibold, and bold
+- Set up open sans as the main font
 - ...
 
 # Notes 📝

@@ -2,15 +2,14 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SandboxForm } from './sandbox-form.model';
 import { AppValidators } from '../shared/validation/services/app-validators.service';
-import { Subscription, Observable, of } from 'rxjs';
-import { FormService } from '../shared/validation/models/form-service.model';
+import { Observable, of } from 'rxjs';
 import { ShowRunInfoValidators } from '../shared/components/show-run-info/show-run-info-validators.model';
 import { KingOfTheHillManualValidator } from './koth-manual.validator';
 import { KingOfTheHillValidationService } from './services/king-of-the-hill-validation.service';
-import { tap, concatMap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { MappedFormBuilder } from '../shared/validation/services/mapped-form-builder.service';
 import { ShowRunInfoForm } from '../shared/components/show-run-info/show-run-info-form.model';
-import { ManualValidationHelpers } from '../shared/validation/services/validation-helpers.service';
+import { ManualValidationHelpers } from '../shared/validation/services/manual-validation-helpers.service';
 import { FormServiceBase } from '../shared/validation/services/form-service-base.service';
 
 @Injectable()
