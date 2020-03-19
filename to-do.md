@@ -1,14 +1,12 @@
 # To Do 📃
 - Review submit-time AsyncValidation and synchronous validation. Make any to-do's based on refactor opportunities.
-  - Create validation-helpers.service.ts
-  - Make helper function that links a status change from one control to an array of others
-  - Make helper function that registers a onetime validation failure for a manual validator?
 - Would this help or hurt?
   - Abstract base class for form services
     - protected formGroup: FormGroup
     - protected formSubscriptions: Subscription[]
     - Has dispose() with formSubscriptions being unsubscribed from
     - ...
+- Refactor, can you make a service that encapsulates group manual validation and leverages the new helpers?
 - Add open sans regular, semibold, and bold
 - Set up open sans as the main font
 - Apply some basic styles globally and then use in the validation control component for structuring the content
@@ -16,6 +14,11 @@
   - This could be already done by Kendo, else a directive may suffice to style Kendo controls as errored.
 - Add hook for customizing error messages
 - Remove magenta box shadows; too much trouble to persist across all inputs
+- Update all class names / selectors for the validation feature to be very specific so that this can be reused on a wide scale.
+  - Selectors: vf-validated-control, vf-error-icon, vf-validation-message, etc.
+  - Class names: Something like vf-state-valid / vf-state-invalid / vf-state-invalid-message / vf-state-invalid
+- Cut a library and move the validation content to a standalone library
+- Pull the module back into the sandbox
 - ...
 
 # Notes 📝

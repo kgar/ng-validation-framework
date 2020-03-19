@@ -10,6 +10,7 @@ import { KingOfTheHillValidationService } from './services/king-of-the-hill-vali
 import { tap, concatMap } from 'rxjs/operators';
 import { MappedFormBuilder } from '../shared/validation/services/mapped-form-builder.service';
 import { ShowRunInfoForm } from '../shared/components/show-run-info/show-run-info-form.model';
+import { ManualValidationHelpers } from '../shared/validation/services/validation-helpers.service';
 
 @Injectable()
 export class SandboxFormService implements FormService {
@@ -34,10 +35,7 @@ export class SandboxFormService implements FormService {
             this.kingOfTheHillValidator.validator.fn,
           ],
         ],
-        animationType: [
-          '',
-          [AppValidators.required.fn, this.kingOfTheHillValidator.validator.fn],
-        ],
+        animationType: ['', [AppValidators.required.fn, this.kingOfTheHillValidator.validator.fn]],
         description: [
           'Description here.',
           [
@@ -65,11 +63,12 @@ export class SandboxFormService implements FormService {
       { validators: [this.kingOfTheHillValidator.validator.fn] },
     );
 
-    // TODO: to helper function that links a status change from one control to an array of others
-    this.formSubscriptions.push(this.formGroup.statusChanges.subscribe(() => {
-      this.formGroup.get('name').updateValueAndValidity({ onlySelf: true });
-      this.formGroup.get('animationType').updateValueAndValidity({ onlySelf: true });
-    }));
+    const subscription = ManualValidationHelpers.linkManuallyValidatedGroup(this.formGroup, [
+      this.formGroup.get('name'),
+      this.formGroup.get('animationType'),
+    ]);
+
+    this.formSubscriptions.push(subscription);
   }
 
   // TODO: Figure out how to take away the boilerplate for this
@@ -86,7 +85,11 @@ export class SandboxFormService implements FormService {
       .validate(this.formGroup.get('name').value, this.formGroup.get('animationType').value)
       .pipe(
         tap(isValid => {
-          this.triggerOneTimeValidationCheck(isValid);
+          ManualValidationHelpers.triggerOneTimeValidationCheck(
+            isValid,
+            valid => (this.kingOfTheHillValidator.isValid = valid),
+            this.formGroup,
+          );
         }),
       );
 
@@ -99,13 +102,6 @@ export class SandboxFormService implements FormService {
     );
 
     return submission$;
-  }
-
-  // TODO: Can this somehow be made more maintainable? It's a common thing for submit-time async validation...
-  private triggerOneTimeValidationCheck(isValid) {
-    this.kingOfTheHillValidator.isValid = isValid;
-    this.formGroup.updateValueAndValidity();
-    this.kingOfTheHillValidator.isValid = true;
   }
 
   private save() {
