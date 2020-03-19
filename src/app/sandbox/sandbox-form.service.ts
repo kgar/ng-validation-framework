@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { SandboxForm } from './sandbox-form.model';
 import { AppValidators } from '../shared/validation/app-validators.service';
 import { Subscription, Observable, of } from 'rxjs';
@@ -8,6 +8,8 @@ import { ShowRunInfoValidators } from '../shared/components/show-run-info/show-r
 import { KingOfTheHillManualValidator } from './koth-manual.validator';
 import { KingOfTheHillValidationService } from './services/king-of-the-hill-validation.service';
 import { tap, concatMap } from 'rxjs/operators';
+import { MappedFormBuilder } from '../shared/validation/services/mapped-form-builder.service';
+import { ShowRunInfoForm } from '../shared/components/show-run-info/show-run-info-form.model';
 
 @Injectable()
 export class SandboxFormService implements FormService {
@@ -16,13 +18,13 @@ export class SandboxFormService implements FormService {
   public customFormValidators = [this.kingOfTheHillValidator.validator];
 
   constructor(
-    private fb: FormBuilder,
+    private fb: MappedFormBuilder,
     private kingOfTheHillValidator: KingOfTheHillManualValidator,
     private kingOfTheHillValidationService: KingOfTheHillValidationService,
   ) {}
 
   public init() {
-    this.formGroup = this.fb.group(
+    this.formGroup = this.fb.group<SandboxForm>(
       {
         name: [
           '',
@@ -43,18 +45,18 @@ export class SandboxFormService implements FormService {
             AppValidators.minlength.fn(this.descriptionMinLength),
           ],
         ],
-        currentShowRunInfo: this.fb.group({
+        currentShowRunInfo: this.fb.group<ShowRunInfoForm>({
           firstAirDate: [null, AppValidators.required.fn],
           totalSeasonsToDate: [0, ShowRunInfoValidators.totalSeasonsToDateValidators],
         }),
-        nextShowRunInfo: this.fb.group({
+        nextShowRunInfo: this.fb.group<ShowRunInfoForm>({
           firstAirDate: [new Date()],
           totalSeasonsToDate: [
             null,
             [...ShowRunInfoValidators.totalSeasonsToDateValidators, AppValidators.required.fn],
           ],
         }),
-        imaginaryShowRunInfo: this.fb.group({
+        imaginaryShowRunInfo: this.fb.group<ShowRunInfoForm>({
           firstAirDate: [new Date('1/30/2048')],
           totalSeasonsToDate: [0],
         }),

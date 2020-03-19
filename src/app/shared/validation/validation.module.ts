@@ -5,8 +5,10 @@ import { ValidatedFormGroupComponent } from './components/validated-form-group/v
 import { ValidationErrorIconComponent } from './components/validation-error-icon/validation-error-icon.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MappedFormBuilder } from './services/mapped-form-builder.service';
 
 @NgModule({
+  providers: [MappedFormBuilder],
   declarations: [
     ValidatedControlComponent,
     ValidationErrorIconComponent,
