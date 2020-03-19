@@ -35,6 +35,7 @@ export class SandboxComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.formService.submit().subscribe(success => {
+      console.log(success);
       if (success) {
         alert('You did it!');
       }

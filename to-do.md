@@ -1,9 +1,11 @@
 # To Do 📃
 - Try this: Make async validation occur only at form submission time
-  - Create service that creates observable to await pending validation until it's either valid or invalid
-  - Upgrade the KingOfTheHillValidator to be async
   - Put the KingOfTheHillValidator in an ActivatedValidator and use as AsyncValidator in formgroup
   - Update submit() to activate validators, update validity of the form, create observable of awaiting validation, and return success or failure of form submission
+  - Create service that creates observable to await pending validation until it's either valid or invalid
+- Refactor: Separate async and sync validators out of AppValidator
+- Refactor: Get a better name for AppValidator and for for the "fn".
+- Review submit-time AsyncValidation and synchronous validation. Make any to-do's based on refactor opportunities.
 - Add open sans regular, semibold, and bold
 - Set up open sans as the main font
 - Apply some basic styles globally and then use in the validation control component for structuring the content

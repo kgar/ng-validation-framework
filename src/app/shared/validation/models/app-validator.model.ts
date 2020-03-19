@@ -1,9 +1,9 @@
-import { ValidatorFn } from '@angular/forms';
+import { ValidatorFn, AsyncValidator, Validator } from '@angular/forms';
 import { ValidationErrorMessage } from './validation-error-message.type';
 
 export interface AppValidator {
   name: string;
-  fn: ValidatorFn;
+  fn: ValidatorFn | Validator | AsyncValidator;
   errorMessage: ValidationErrorMessage;
   priority: number;
 }

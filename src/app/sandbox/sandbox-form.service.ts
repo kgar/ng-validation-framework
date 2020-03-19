@@ -2,7 +2,7 @@ import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SandboxForm } from './sandbox-form.model';
 import { AppValidators } from '../shared/validation/app-validators.service';
-import { KingOfTheHillAnimeValidatorFn } from './koth-anime.validator';
+import { KingOfTheHillAnimeValidatorFn, KingOfTheHillAnimeValidator } from './koth-anime.validator';
 import { Subscription, Observable, of } from 'rxjs';
 import { FormService } from '../shared/validation/models/form-service.model';
 import { ShowRunInfoValidators } from '../shared/components/show-run-info/show-run-info-validators.model';
@@ -11,7 +11,7 @@ import { ShowRunInfoValidators } from '../shared/components/show-run-info/show-r
 export class SandboxFormService implements FormService {
   formGroup: FormGroup;
 
-  kingOfTheHillValidator = KingOfTheHillAnimeValidatorFn;
+  kingOfTheHillValidator = KingOfTheHillAnimeValidator.fn;
   kingOfTheHillIsValid = true;
   kingOfTheHillControlsManualValidator = AppValidators.manual.fn({
     isValidCallback: () => this.kingOfTheHillIsValid,
@@ -58,7 +58,7 @@ export class SandboxFormService implements FormService {
         }),
         alphanumericCharacters: ['', [AppValidators.alphanumeric.fn]],
       },
-      { validators: [this.kingOfTheHillValidator] },
+      { asyncValidators: [this.kingOfTheHillValidator] },
     );
 
     this.formSubscriptions$ = this.formGroup.statusChanges.subscribe(() => {
