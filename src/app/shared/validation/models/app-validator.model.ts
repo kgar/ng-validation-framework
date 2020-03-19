@@ -3,7 +3,7 @@ import { ValidationErrorMessage } from './validation-error-message.type';
 
 export interface AppValidator {
   name: string;
-  fn: ValidatorFn | Validator | AsyncValidator;
+  fn: ValidatorFn;
   errorMessage: ValidationErrorMessage;
   priority: number;
 }

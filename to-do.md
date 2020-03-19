@@ -1,10 +1,4 @@
 # To Do 📃
-- Restore async validation functionality
-  - Wire up form service submit() to make the async validation check and return the result as a finite observable
-  - Set up a loading spinner for the consumer to use until the request is done
-  - Can manual validation be set so that it decorates one time and then no longer applies until next submit attempt?
-- Refactor: Separate async and sync validators out of AppValidator
-- Refactor: Get a better name for AppValidator and for for the "fn".
 - Review submit-time AsyncValidation and synchronous validation. Make any to-do's based on refactor opportunities.
 - Add open sans regular, semibold, and bold
 - Set up open sans as the main font
