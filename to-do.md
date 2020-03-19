@@ -1,5 +1,14 @@
 # To Do 📃
 - Review submit-time AsyncValidation and synchronous validation. Make any to-do's based on refactor opportunities.
+  - Create validation-helpers.service.ts
+  - Make helper function that links a status change from one control to an array of others
+  - Make helper function that registers a onetime validation failure for a manual validator?
+- Would this help or hurt?
+  - Abstract base class for form services
+    - protected formGroup: FormGroup
+    - protected formSubscriptions: Subscription[]
+    - Has dispose() with formSubscriptions being unsubscribed from
+    - ...
 - Add open sans regular, semibold, and bold
 - Set up open sans as the main font
 - Apply some basic styles globally and then use in the validation control component for structuring the content

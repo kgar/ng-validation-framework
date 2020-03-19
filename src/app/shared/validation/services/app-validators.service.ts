@@ -1,12 +1,12 @@
-import { ValidatorPriority } from './models/validator-priority.enum';
+import { ValidatorPriority } from '../models/validator-priority.enum';
 import { Validators } from '@angular/forms';
-import { AppValidator } from './models/app-validator.model';
-import { AppConfigurableValidator } from './models/app-configurable-validator.model';
-import { InvalidTextValidator } from './custom-validators/invalid-text.validator';
-import { TextMustMatchValidator } from './custom-validators/text-must-match.validator';
-import { TextMustMatchArgs } from './custom-validators/text-must-match-args.model';
-import { AlphanumericValidator } from './custom-validators/alphanumeric.validator';
-import { ManualValidator, ManualValidatorArgs } from './custom-validators/manual.validator';
+import { AppValidator } from '../models/app-validator.model';
+import { AppConfigurableValidator } from '../models/app-configurable-validator.model';
+import { InvalidTextValidator } from '../custom-validators/invalid-text.validator';
+import { TextMustMatchValidator } from '../custom-validators/text-must-match.validator';
+import { TextMustMatchArgs } from '../custom-validators/text-must-match-args.model';
+import { AlphanumericValidator } from '../custom-validators/alphanumeric.validator';
+import { ManualValidator, ManualValidatorArgs } from '../custom-validators/manual.validator';
 
 export class AppValidators {
   static required: AppValidator = {
@@ -77,6 +77,6 @@ export class AppValidators {
     name: 'manual',
     errorMessage: '',
     fn: ManualValidator,
-    priority: ValidatorPriority.Lowest
+    priority: ValidatorPriority.Lowest,
   };
 }

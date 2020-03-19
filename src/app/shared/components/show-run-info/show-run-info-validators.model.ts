@@ -1,4 +1,4 @@
-import { AppValidators } from '../../validation/app-validators.service';
+import { AppValidators } from '../../validation/services/app-validators.service';
 
 export class ShowRunInfoValidators {
   public static get totalSeasonsToDateValidators() {

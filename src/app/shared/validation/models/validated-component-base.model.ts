@@ -1,7 +1,7 @@
 import { Input } from '@angular/core';
 import { CustomValidationErrorMessages } from './custom-validation-error-messages.model';
 import { AbstractControlDirective, AbstractFormGroupDirective } from '@angular/forms';
-import { ValidationService } from '../validation.service';
+import { ValidationService } from '../services/validation.service';
 import { AppValidator } from './app-validator.model';
 
 export class ValidatedComponentBase {

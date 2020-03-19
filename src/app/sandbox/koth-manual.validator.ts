@@ -1,5 +1,5 @@
 import { AppValidator } from '../shared/validation/models/app-validator.model';
-import { AppValidators } from '../shared/validation/app-validators.service';
+import { AppValidators } from '../shared/validation/services/app-validators.service';
 import { ValidatorPriority } from '../shared/validation/models/validator-priority.enum';
 import { Injectable } from '@angular/core';
 

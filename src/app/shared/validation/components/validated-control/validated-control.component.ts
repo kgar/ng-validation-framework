@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ElementRef, ContentChild } from '@angular/core';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
-import { ValidationService } from '../../validation.service';
+import { ValidationService } from '../../services/validation.service';
 import { ValidatedComponentBase } from '../../models/validated-component-base.model';
 import { NgControl } from '@angular/forms';
 

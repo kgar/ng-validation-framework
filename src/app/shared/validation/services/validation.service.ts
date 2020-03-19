@@ -1,8 +1,8 @@
-import { ValidationErrorMessage } from './models/validation-error-message.type';
+import { ValidationErrorMessage } from '../models/validation-error-message.type';
 import { Injectable } from '@angular/core';
 import { AbstractFormGroupDirective, AbstractControlDirective } from '@angular/forms';
 import { AppValidators } from './app-validators.service';
-import { AppValidator } from './models/app-validator.model';
+import { AppValidator } from '../models/app-validator.model';
 
 @Injectable({
   providedIn: 'root',

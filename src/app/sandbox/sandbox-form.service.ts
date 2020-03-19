@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { SandboxForm } from './sandbox-form.model';
-import { AppValidators } from '../shared/validation/app-validators.service';
+import { AppValidators } from '../shared/validation/services/app-validators.service';
 import { Subscription, Observable, of } from 'rxjs';
 import { FormService } from '../shared/validation/models/form-service.model';
 import { ShowRunInfoValidators } from '../shared/components/show-run-info/show-run-info-validators.model';
@@ -13,7 +13,7 @@ import { ShowRunInfoForm } from '../shared/components/show-run-info/show-run-inf
 
 @Injectable()
 export class SandboxFormService implements FormService {
-  private formSubscriptions$: Subscription;
+  private formSubscriptions: Subscription[] = [];
   public formGroup: FormGroup;
   public customFormValidators = [this.kingOfTheHillValidator.validator];
 
@@ -31,12 +31,12 @@ export class SandboxFormService implements FormService {
           [
             AppValidators.required.fn,
             AppValidators.minlength.fn(2),
-            this.kingOfTheHillValidator.controlsValidatorFn,
+            this.kingOfTheHillValidator.validator.fn,
           ],
         ],
         animationType: [
           '',
-          [AppValidators.required.fn, this.kingOfTheHillValidator.controlsValidatorFn],
+          [AppValidators.required.fn, this.kingOfTheHillValidator.validator.fn],
         ],
         description: [
           'Description here.',
@@ -65,13 +65,11 @@ export class SandboxFormService implements FormService {
       { validators: [this.kingOfTheHillValidator.validator.fn] },
     );
 
-    this.formSubscriptions$ = this.formGroup.statusChanges.subscribe(() => {
-      this.kingOfTheHillValidator.isValid = !this.formGroup.errors?.kingOfTheHillAnime;
-      // TODO: Comment these lines temporarily to see if it'll just work
-      // TODO: Uncomment these lines if not working
+    // TODO: to helper function that links a status change from one control to an array of others
+    this.formSubscriptions.push(this.formGroup.statusChanges.subscribe(() => {
       this.formGroup.get('name').updateValueAndValidity({ onlySelf: true });
       this.formGroup.get('animationType').updateValueAndValidity({ onlySelf: true });
-    });
+    }));
   }
 
   // TODO: Figure out how to take away the boilerplate for this
@@ -103,6 +101,7 @@ export class SandboxFormService implements FormService {
     return submission$;
   }
 
+  // TODO: Can this somehow be made more maintainable? It's a common thing for submit-time async validation...
   private triggerOneTimeValidationCheck(isValid) {
     this.kingOfTheHillValidator.isValid = isValid;
     this.formGroup.updateValueAndValidity();
@@ -146,6 +145,6 @@ export class SandboxFormService implements FormService {
   }
 
   dispose(): void {
-    this.formSubscriptions$?.unsubscribe();
+    this.formSubscriptions.forEach(s$ => s$.unsubscribe());
   }
 }
