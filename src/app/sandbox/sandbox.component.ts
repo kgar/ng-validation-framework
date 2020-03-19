@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faInfoCircle, faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
 import { SandboxFormService } from './sandbox-form.service';
-import { KingOfTheHillAnimeValidator } from './koth-anime.validator';
 
 @Component({
   selector: 'app-sandbox',
@@ -11,7 +10,6 @@ import { KingOfTheHillAnimeValidator } from './koth-anime.validator';
 export class SandboxComponent implements OnInit, OnDestroy {
   faInfoCircle = faInfoCircle;
   faPizzaSlice = faPizzaSlice;
-  customFormValidators = [KingOfTheHillAnimeValidator];
 
   get formGroup() {
     return this.formService?.formGroup;

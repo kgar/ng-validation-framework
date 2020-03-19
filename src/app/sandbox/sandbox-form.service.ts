@@ -2,25 +2,21 @@ import { Injectable, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SandboxForm } from './sandbox-form.model';
 import { AppValidators } from '../shared/validation/app-validators.service';
-import { KingOfTheHillAnimeValidatorFn, KingOfTheHillAnimeValidator } from './koth-anime.validator';
 import { Subscription, Observable, of } from 'rxjs';
 import { FormService } from '../shared/validation/models/form-service.model';
 import { ShowRunInfoValidators } from '../shared/components/show-run-info/show-run-info-validators.model';
+import { KingOfTheHillManualValidator } from './koth-manual.validator';
 
 @Injectable()
 export class SandboxFormService implements FormService {
-  formGroup: FormGroup;
+  private formSubscriptions$: Subscription;
+  public formGroup: FormGroup;
+  public customFormValidators = [this.kingOfTheHillValidator.validator];
 
-  kingOfTheHillValidator = KingOfTheHillAnimeValidator.fn;
-  kingOfTheHillIsValid = true;
-  kingOfTheHillControlsManualValidator = AppValidators.manual.fn({
-    isValidCallback: () => this.kingOfTheHillIsValid,
-    validationErrorKey: 'kingOfTheHillIsAnime',
-  });
-
-  formSubscriptions$: Subscription;
-
-  constructor(private fb: FormBuilder) {}
+  constructor(
+    private fb: FormBuilder,
+    private kingOfTheHillValidator: KingOfTheHillManualValidator,
+  ) {}
 
   public init() {
     this.formGroup = this.fb.group(
@@ -30,10 +26,13 @@ export class SandboxFormService implements FormService {
           [
             AppValidators.required.fn,
             AppValidators.minlength.fn(2),
-            this.kingOfTheHillControlsManualValidator,
+            this.kingOfTheHillValidator.controlsValidatorFn,
           ],
         ],
-        animationType: ['', [AppValidators.required.fn, this.kingOfTheHillControlsManualValidator]],
+        animationType: [
+          '',
+          [AppValidators.required.fn, this.kingOfTheHillValidator.controlsValidatorFn],
+        ],
         description: [
           'Description here.',
           [
@@ -58,19 +57,29 @@ export class SandboxFormService implements FormService {
         }),
         alphanumericCharacters: ['', [AppValidators.alphanumeric.fn]],
       },
-      { asyncValidators: [this.kingOfTheHillValidator] },
+      { validators: [this.kingOfTheHillValidator.validator.fn] },
     );
 
     this.formSubscriptions$ = this.formGroup.statusChanges.subscribe(() => {
-      this.kingOfTheHillIsValid = !this.formGroup.errors?.kingOfTheHillAnime;
+      this.kingOfTheHillValidator.isValid = !this.formGroup.errors?.kingOfTheHillAnime;
+      // TODO: Comment these lines temporarily to see if it'll just work
+      // TODO: Uncomment these lines if not working
       this.formGroup.get('name').updateValueAndValidity({ onlySelf: true });
       this.formGroup.get('animationType').updateValueAndValidity({ onlySelf: true });
     });
   }
 
+  // TODO: Figure out how to take away the boilerplate for this
   public submit(): Observable<boolean> {
     this.formGroup.markAllAsTouched();
 
+    if (this.formGroup.valid) {
+      return of(true);
+    }
+
+    // Check async validation
+
+    // Somehow return this after forms have been checked
     return of(this.formGroup.valid);
   }
 

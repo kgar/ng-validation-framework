@@ -10,6 +10,8 @@ import { SandboxFormService } from './sandbox/sandbox-form.service';
 import { ValidationModule } from './shared/validation/validation.module';
 import { HomeComponent } from './home/home.component';
 import { SharedModule } from './shared/shared.module';
+import { KingOfTheHillValidationService } from './sandbox/services/king-of-the-hill-validation.service';
+import { KingOfTheHillManualValidator } from './sandbox/koth-manual.validator';
 
 @NgModule({
   declarations: [AppComponent, SandboxComponent, HomeComponent],
@@ -20,7 +22,7 @@ import { SharedModule } from './shared/shared.module';
     FontAwesomeModule,
     SharedModule,
   ],
-  providers: [SandboxFormService],
+  providers: [SandboxFormService, KingOfTheHillValidationService, KingOfTheHillManualValidator],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

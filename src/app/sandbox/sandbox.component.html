@@ -1,7 +1,7 @@
 <h1>Validation Sandbox</h1>
 <app-validated-form-group
   #sandboxFormGroup
-  [customValidators]="customFormValidators"
+  [customValidators]="formService.customFormValidators"
   [useValidationMessages]="false"
 >
   <form [formGroup]="formService.formGroup" (ngSubmit)="onSubmit()">

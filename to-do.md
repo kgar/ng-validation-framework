@@ -1,8 +1,8 @@
 # To Do 📃
-- Try this: Make async validation occur only at form submission time
-  - Put the KingOfTheHillValidator in an ActivatedValidator and use as AsyncValidator in formgroup
-  - Update submit() to activate validators, update validity of the form, create observable of awaiting validation, and return success or failure of form submission
-  - Create service that creates observable to await pending validation until it's either valid or invalid
+- Restore async validation functionality
+  - Wire up form service submit() to make the async validation check and return the result as a finite observable
+  - Set up a loading spinner for the consumer to use until the request is done
+  - Can manual validation be set so that it decorates one time and then no longer applies until next submit attempt?
 - Refactor: Separate async and sync validators out of AppValidator
 - Refactor: Get a better name for AppValidator and for for the "fn".
 - Review submit-time AsyncValidation and synchronous validation. Make any to-do's based on refactor opportunities.
@@ -36,6 +36,13 @@ There are 2 parts to this challenge:
   - The ActivatedValidator part will feed Success observable results until told to enforce the async validator
   - The code would activate the validator and then request an update to status / validity
   - After this, use the technique in part 1 to wait for something other than "pending". Once no longer pending, deactivate the activated validator but don't update validity. The user will do it and dismiss the message.
+
+Update: Unfortunately, an activated validator approach won't work. Once activated, the validator will eagerly check async validation, and deactivating it causes the validation decoration to go away. The next iteration of this effort is as follows:
+1. Ditch AsyncValidator usage altogether
+2. Make a manual async check at submission time
+3. Apply the results to a manual validator
+4. Console log a placeholder for actually saving data (or failing validation)
+5. Emit the result to the caller
 
 ## Nested form groups
 I've read various Medium articles on how to share components that have validation rules built in.
