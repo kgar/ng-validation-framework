@@ -2,13 +2,13 @@ import { Input } from '@angular/core';
 import { CustomValidationErrorMessages } from './custom-validation-error-messages.model';
 import { AbstractControlDirective, AbstractFormGroupDirective } from '@angular/forms';
 import { ValidationService } from '../services/validation.service';
-import { AppValidator } from './app-validator.model';
+import { AppValidatorConfig } from './app-validator-config.model';
 
 export class ValidatedComponentBase {
   /* A collection of message overrides for globally available application validators */
   @Input() customValidationMessages: CustomValidationErrorMessages = {};
   /* A collection of custom validators specific to the component */
-  @Input() customValidators: AppValidator[];
+  @Input() customValidators: AppValidatorConfig[];
   @Input() useValidationMessages = true;
 
   constructor(protected vs: ValidationService) {}

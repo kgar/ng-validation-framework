@@ -1,9 +1,9 @@
 import { ValidatorFn } from '@angular/forms';
 import { ValidationErrorMessage } from './validation-error-message.type';
 
-export interface AppConfigurableValidator<T> {
+export interface AppValidatorFactoryConfig<T> {
   name: string;
-  fn: (args: T) => ValidatorFn;
+  createFn: (args: T) => ValidatorFn;
   errorMessage: ValidationErrorMessage;
   priority: number;
 }

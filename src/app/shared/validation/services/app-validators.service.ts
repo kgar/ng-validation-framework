@@ -1,82 +1,71 @@
 import { ValidatorPriority } from '../models/validator-priority.enum';
 import { Validators } from '@angular/forms';
-import { AppValidator } from '../models/app-validator.model';
-import { AppConfigurableValidator } from '../models/app-configurable-validator.model';
-import { InvalidTextValidator } from '../custom-validators/invalid-text.validator';
-import { TextMustMatchValidator } from '../custom-validators/text-must-match.validator';
-import { TextMustMatchArgs } from '../custom-validators/text-must-match-args.model';
+import { AppValidatorConfig } from '../models/app-validator-config.model';
+import { AppValidatorFactoryConfig } from '../models/app-validator-factory-config.model';
+import { InvalidTextValidatorFactory } from '../custom-validators/invalid-text.validator';
 import { AlphanumericValidator } from '../custom-validators/alphanumeric.validator';
 import { ManualValidator, ManualValidatorArgs } from '../custom-validators/manual.validator';
 
 export class AppValidators {
-  static required: AppValidator = {
+  static required: AppValidatorConfig = {
     name: 'required',
     errorMessage: 'This field is required',
     priority: ValidatorPriority.Highest,
     fn: Validators.required,
   };
 
-  static alphanumeric: AppValidator = {
+  static alphanumeric: AppValidatorConfig = {
     name: 'alphanumeric',
     errorMessage: 'Alphanumeric characters only',
     priority: ValidatorPriority.Normal,
     fn: AlphanumericValidator,
   };
 
-  static minlength: AppConfigurableValidator<number> = {
+  static minlength: AppValidatorFactoryConfig<number> = {
     name: 'minlength',
     errorMessage: error => `Minimum ${error.requiredLength} characters required`,
     priority: ValidatorPriority.Normal,
-    fn: Validators.minLength,
+    createFn: Validators.minLength,
   };
 
-  static maxlength: AppConfigurableValidator<number> = {
+  static maxlength: AppValidatorFactoryConfig<number> = {
     name: 'maxlength',
     errorMessage: error => `Maximum ${error.requiredLength} characters allowed`,
     priority: ValidatorPriority.Normal,
-    fn: Validators.maxLength,
+    createFn: Validators.maxLength,
   };
 
-  static min: AppConfigurableValidator<number> = {
+  static min: AppValidatorFactoryConfig<number> = {
     name: 'min',
     errorMessage: error => {
       return `Must be at least ${error.min}`;
     },
     priority: ValidatorPriority.Normal,
-    fn: Validators.min,
+    createFn: Validators.min,
   };
 
-  static max: AppConfigurableValidator<number> = {
+  static max: AppValidatorFactoryConfig<number> = {
     name: 'max',
     errorMessage: error => {
       return `Must be no more than ${error.max}`;
     },
     priority: ValidatorPriority.Normal,
-    fn: Validators.max,
+    createFn: Validators.max,
   };
 
-  static invalidText: AppConfigurableValidator<string> = {
+  static invalidText: AppValidatorFactoryConfig<string> = {
     name: 'invalidText',
     errorMessage: error => {
       return `Cannot contain the text ${error.value}`;
     },
-    fn: InvalidTextValidator,
+    createFn: InvalidTextValidatorFactory,
     priority: ValidatorPriority.Normal,
   };
 
-  static textMustMatch: AppConfigurableValidator<TextMustMatchArgs> = {
-    name: 'textMustMatch',
-    errorMessage: error => {
-      return `Text must match with ${error.value}`;
-    },
-    fn: TextMustMatchValidator,
-    priority: ValidatorPriority.Normal,
-  };
-
-  static manual: AppConfigurableValidator<ManualValidatorArgs> = {
+  static manual: AppValidatorFactoryConfig<ManualValidatorArgs> = {
     name: 'manual',
     errorMessage: '',
-    fn: ManualValidator,
+    createFn: ManualValidator,
     priority: ValidatorPriority.Lowest,
   };
 }

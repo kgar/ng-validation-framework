@@ -3,8 +3,18 @@ export interface ManualValidatorArgs {
   validationErrorKey: string;
 }
 
-// Utility validator used to programmatically decorate inputs as invalid
-export function ManualValidator({isValidCallback, validationErrorKey = 'manual'}: ManualValidatorArgs) {
+/**
+ * Utility validator for programmatically decorating inputs as invalid.
+ *
+ * Primarily used for
+ * - group validation where only one error message should appear
+ * - submission-time async validation where the form and affected controls need
+ *   to be programmatically decorated as invalid after a server call.
+ */
+export function ManualValidator({
+  isValidCallback,
+  validationErrorKey = 'manual',
+}: ManualValidatorArgs) {
   return () => {
     return isValidCallback() ? null : { [validationErrorKey]: true };
   };

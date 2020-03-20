@@ -2,7 +2,7 @@ import { ValidationErrorMessage } from '../models/validation-error-message.type'
 import { Injectable } from '@angular/core';
 import { AbstractFormGroupDirective, AbstractControlDirective } from '@angular/forms';
 import { AppValidators } from './app-validators.service';
-import { AppValidator } from '../models/app-validator.model';
+import { AppValidatorConfig } from '../models/app-validator-config.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,15 +12,15 @@ export class ValidationService {
 
   public getHighestPriorityValidator(
     errors: object,
-    customValidators?: AppValidator[],
-  ): AppValidator {
+    customValidators?: AppValidatorConfig[],
+  ): AppValidatorConfig {
     if (!errors) {
       return undefined;
     }
 
     const keys = Object.keys(errors);
 
-    let highestPriorityError: AppValidator;
+    let highestPriorityError: AppValidatorConfig;
     keys.forEach(key => {
       const currentSummary = this.getValidator(key, customValidators);
 
@@ -57,7 +57,7 @@ export class ValidationService {
     }, {});
   }
 
-  private getValidator(key: string, customValidators?: AppValidator[]): AppValidator {
+  private getValidator(key: string, customValidators?: AppValidatorConfig[]): AppValidatorConfig {
     this.validatorKeysLookup = this.validatorKeysLookup || this.createNormalizeKeyLookup();
     return (
       AppValidators[this.validatorKeysLookup[key.toLowerCase()]] ||

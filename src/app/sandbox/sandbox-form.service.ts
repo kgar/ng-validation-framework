@@ -14,7 +14,7 @@ import { FormServiceBase } from '../shared/validation/services/form-service-base
 
 @Injectable()
 export class SandboxFormService extends FormServiceBase {
-  public customFormValidators = [this.kingOfTheHillValidator.validator];
+  public customFormValidators = [this.kingOfTheHillValidator.validatorConfig];
 
   constructor(
     private fb: MappedFormBuilder,
@@ -31,16 +31,16 @@ export class SandboxFormService extends FormServiceBase {
           '',
           [
             AppValidators.required.fn,
-            AppValidators.minlength.fn(2),
-            this.kingOfTheHillValidator.validator.fn,
+            AppValidators.minlength.createFn(2),
+            this.kingOfTheHillValidator.validatorConfig.fn,
           ],
         ],
-        animationType: ['', [AppValidators.required.fn, this.kingOfTheHillValidator.validator.fn]],
+        animationType: ['', [AppValidators.required.fn, this.kingOfTheHillValidator.validatorConfig.fn]],
         description: [
           'Description here.',
           [
-            AppValidators.maxlength.fn(this.descriptionMaxLength),
-            AppValidators.minlength.fn(this.descriptionMinLength),
+            AppValidators.maxlength.createFn(this.descriptionMaxLength),
+            AppValidators.minlength.createFn(this.descriptionMinLength),
           ],
         ],
         currentShowRunInfo: this.fb.group<ShowRunInfoForm>({
@@ -60,7 +60,7 @@ export class SandboxFormService extends FormServiceBase {
         }),
         alphanumericCharacters: ['', [AppValidators.alphanumeric.fn]],
       },
-      { validators: [this.kingOfTheHillValidator.validator.fn] },
+      { validators: [this.kingOfTheHillValidator.validatorConfig.fn] },
     );
 
     const subscription = ManualValidationHelpers.linkManuallyValidatedGroup(this.formGroup, [

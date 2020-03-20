@@ -1,7 +1,7 @@
 import { ValidatorFn, AsyncValidator, Validator } from '@angular/forms';
 import { ValidationErrorMessage } from './validation-error-message.type';
 
-export interface AppValidator {
+export interface AppValidatorConfig {
   name: string;
   fn: ValidatorFn;
   errorMessage: ValidationErrorMessage;
