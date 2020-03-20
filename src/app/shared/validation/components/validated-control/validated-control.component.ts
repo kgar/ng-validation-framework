@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, ElementRef, ContentChild } from '@angular/core';
-import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { ValidationService } from '../../services/validation.service';
 import { ValidatedComponentBase } from '../../models/validated-component-base.model';
 import { NgControl } from '@angular/forms';
@@ -9,7 +8,6 @@ import { NgControl } from '@angular/forms';
   templateUrl: './validated-control.component.html',
 })
 export class ValidatedControlComponent extends ValidatedComponentBase implements OnInit {
-  faExclamationCircle = faExclamationCircle;
   @ContentChild(NgControl) control: NgControl;
   @Input() label = undefined;
   @Input() labelFor = '';

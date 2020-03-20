@@ -3,7 +3,9 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-validation-error-icon',
-  templateUrl: './validation-error-icon.component.html',
+  template: `
+    <fa-icon [icon]="faExclamationCircle" class="vf-error-icon"></fa-icon>
+  `,
 })
 export class ValidationErrorIconComponent {
   faExclamationCircle = faExclamationCircle;

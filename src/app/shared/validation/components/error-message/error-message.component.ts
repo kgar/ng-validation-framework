@@ -2,8 +2,12 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-error-message',
-  templateUrl: './error-message.component.html',
+  template: `
+    <div class="vf-validation-error-message">
+      {{ errorMessage }}
+    </div>
+  `,
 })
 export class ErrorMessageComponent {
-  @Input() errorMessage;
+  @Input() errorMessage: string;
 }

@@ -4,7 +4,13 @@ import { FormGroupDirective } from '@angular/forms';
 
 @Component({
   selector: 'app-validated-form-group',
-  templateUrl: './validated-form-group.component.html',
+  template: `
+    <ng-content></ng-content>
+    <app-error-message
+      *ngIf="useDefaultMessagePlacement && showError"
+      [errorMessage]="errorMessage"
+    ></app-error-message>
+  `,
 })
 export class ValidatedFormGroupComponent extends ValidatedComponentBase {
   @ContentChild(FormGroupDirective) formGroup: FormGroupDirective;
