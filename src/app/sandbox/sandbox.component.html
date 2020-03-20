@@ -82,21 +82,12 @@
       <input kendoTextBox formControlName="alphanumericCharacters" />
     </app-validated-control>
 
-    <p>Scenario: Nested components and form composition</p>
-
     <p>
       Scenario: A checkbox, when checked, enables and requires a text box in a nested form group
     </p>
     <p>
       Scenario: A checkbox, when checked, enables and requires a text box somewhere else in the form
       that is not in a nested form group together
-    </p>
-    <p>Scenario: A required dropdown list</p>
-    <p>Scenario: A required Kendo dropdown list</p>
-    <p>Scenario: A textbox with required, minlength, email, maxlength--in that order</p>
-    <p>
-      Scenario: A group of inputs where a specific combination is required. All are invalid, but
-      there should be only one validation message below them.
     </p>
 
     <p class="one-off-tests-panel">
@@ -106,6 +97,7 @@
       <button type="button" kendoButton (click)="kothTest(true)">
         Run passing King-of-the-hill test
       </button>
+      <em>(King of the Hill validation is an example of submission-time validation)</em>
     </p>
     <button type="submit" kendoButton [primary]="true">Submit</button>
 
