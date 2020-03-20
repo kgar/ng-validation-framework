@@ -1,1 +1,32 @@
-<p>home works!</p>
+<app-validated-form-group
+  [useDefaultMessagePlacement]="false"
+  #formValidation
+  [customValidators]="customFormGroupValidators"
+>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <app-validated-control label="Username" labelFor="username">
+      <input type="text" kendoTextBox formControlName="username" id="username" />
+    </app-validated-control>
+    <app-validated-control label="Password">
+      <input type="password" kendoTextBox formControlName="password" />
+    </app-validated-control>
+    <app-validated-control label="Confirm Password">
+      <input type="password" kendoTextBox formControlName="confirmPassword" />
+    </app-validated-control>
+
+    <app-error-message
+      [errorMessage]="formValidation.errorMessage"
+      *ngIf="formValidation.showError"
+    ></app-error-message>
+
+    <button type="submit" kendoButton [primary]="true">Submit</button>
+  </form>
+</app-validated-form-group>
+
+<p *ngIf="formGroup">
+  Status: {{ formGroup.status }}<br />
+  Value: {{ formGroup.value | json }}<br />
+  Errors: {{ formGroup.errors | json }}<br />
+  Touched: {{ formGroup.touched }}<br />
+  Dirty: {{ formGroup.dirty }}<br />
+</p>

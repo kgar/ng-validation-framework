@@ -13,7 +13,7 @@ import { ManualValidationHelpers } from '../shared/validation/services/manual-va
 import { FormServiceBase } from '../shared/validation/services/form-service-base.service';
 
 @Injectable()
-export class SandboxFormService extends FormServiceBase {
+export class SandboxFormService extends FormServiceBase<SandboxForm> {
   public customFormValidators = [this.kingOfTheHillValidator.validatorConfig];
 
   constructor(
@@ -35,7 +35,10 @@ export class SandboxFormService extends FormServiceBase {
             this.kingOfTheHillValidator.validatorConfig.fn,
           ],
         ],
-        animationType: ['', [AppValidators.required.fn, this.kingOfTheHillValidator.validatorConfig.fn]],
+        animationType: [
+          '',
+          [AppValidators.required.fn, this.kingOfTheHillValidator.validatorConfig.fn],
+        ],
         description: [
           'Description here.',
           [
@@ -108,18 +111,6 @@ export class SandboxFormService extends FormServiceBase {
 
   public get imaginaryShowRunInfo(): FormGroup {
     return this.formGroup.get('imaginaryShowRunInfo') as FormGroup;
-  }
-
-  public getForm(): SandboxForm {
-    return this.formGroup.value;
-  }
-
-  public set(model: SandboxForm) {
-    this.formGroup.setValue(model);
-  }
-
-  public patch(model: SandboxForm) {
-    this.formGroup.patchValue(model);
   }
 
   dispose(): void {

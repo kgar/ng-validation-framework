@@ -9,7 +9,7 @@ import { concatMap, take, map } from 'rxjs/operators';
  *
  * Use when creating form services for components that feature a reactive form.
  */
-export abstract class FormServiceBase implements FormService {
+export abstract class FormServiceBase<TFormModel> implements FormService {
   protected formSubscriptions: Subscription[] = [];
   public formGroup: FormGroup;
 
@@ -63,13 +63,29 @@ export abstract class FormServiceBase implements FormService {
    * When not overridden, it functions as a NOOP.
    */
   protected validateAsync(): Observable<any> {
-    return of();
+    return of(undefined);
   }
 
   /**
    * Saves data to the server.
    */
   protected abstract save(): Observable<any>;
+
+  /**
+   * Allows a partial update to the form group.
+   * @see https://angular.io/guide/reactive-forms#patching-the-model-value
+   */
+  public patch(formModel: TFormModel) {
+    this.formGroup.patchValue(formModel);
+  }
+
+  /**
+   * Allows a full update to the form group.
+   * @see https://angular.io/guide/reactive-forms#replacing-a-form-control-value
+   */
+  public set(formModel: TFormModel) {
+    this.formGroup.setValue(formModel);
+  }
 
   /**
    * Unsubscribes from all form subscriptions that were collected since initialization.
