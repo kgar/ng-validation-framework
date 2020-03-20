@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, AbstractControlOptions, ValidatorFn, AsyncValidatorFn } from '@angular/forms';
 import { MappedAbstractControlConfig } from '../models/mapped-abstract-control-config.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 /**
  * A decorator for the Angular FormBuilder service which allows for
  * the creation of form groups / arrays / controls that adhere to
