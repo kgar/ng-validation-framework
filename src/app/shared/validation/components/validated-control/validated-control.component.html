@@ -5,7 +5,7 @@
   </div>
   <ng-content></ng-content>
   <app-error-message
-    *ngIf="useValidationMessages && showError"
+    *ngIf="useDefaultMessagePlacement && showError"
     [errorMessage]="errorMessage"
   ></app-error-message>
 </div>

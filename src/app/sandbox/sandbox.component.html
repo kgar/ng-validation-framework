@@ -2,7 +2,7 @@
 <app-validated-form-group
   #sandboxFormGroup
   [customValidators]="formService.customFormValidators"
-  [useValidationMessages]="false"
+  [useDefaultMessagePlacement]="false"
 >
   <form [formGroup]="formService.formGroup" (ngSubmit)="onSubmit()">
     <app-validated-control label="Name" labelFor="name">
@@ -55,7 +55,7 @@
     </div>
     <app-validated-control
       label="Show Description"
-      [useValidationMessages]="false"
+      [useDefaultMessagePlacement]="false"
       [useLabelAndErrorIconProps]="false"
       #descriptionValidation
     >

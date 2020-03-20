@@ -15,7 +15,6 @@ export class ValidatedControlComponent extends ValidatedComponentBase implements
   @Input() labelFor = '';
   @Input() useLabelAndErrorIconProps = true;
 
-
   public get errorMessage() {
     if (this.control?.errors?.validatedControlForcedError) {
       return '';

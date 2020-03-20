@@ -9,7 +9,7 @@ export class ValidatedComponentBase {
   @Input() customValidationMessages: CustomValidationErrorMessages = {};
   /* A collection of custom validators specific to the component */
   @Input() customValidators: AppValidatorConfig[];
-  @Input() useValidationMessages = true;
+  @Input() useDefaultMessagePlacement = true;
 
   constructor(protected vs: ValidationService) {}
 

@@ -17,6 +17,6 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
     ErrorMessageComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule],
-  exports: [ValidatedControlComponent, ValidationErrorIconComponent, ValidatedFormGroupComponent],
+  exports: [ValidatedControlComponent, ValidationErrorIconComponent, ValidatedFormGroupComponent, ErrorMessageComponent],
 })
 export class ValidationModule {}

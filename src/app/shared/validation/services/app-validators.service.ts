@@ -7,18 +7,12 @@ import { AlphanumericValidator } from '../custom-validators/alphanumeric.validat
 import { ManualValidator, ManualValidatorArgs } from '../custom-validators/manual.validator';
 
 export class AppValidators {
+
   static required: AppValidatorConfig = {
     name: 'required',
     errorMessage: 'This field is required',
     priority: ValidatorPriority.Highest,
     fn: Validators.required,
-  };
-
-  static alphanumeric: AppValidatorConfig = {
-    name: 'alphanumeric',
-    errorMessage: 'Alphanumeric characters only',
-    priority: ValidatorPriority.Normal,
-    fn: AlphanumericValidator,
   };
 
   static minlength: AppValidatorFactoryConfig<number> = {
@@ -51,6 +45,13 @@ export class AppValidators {
     },
     priority: ValidatorPriority.Normal,
     createFn: Validators.max,
+  };
+
+  static alphanumeric: AppValidatorConfig = {
+    name: 'alphanumeric',
+    errorMessage: 'Alphanumeric characters only',
+    priority: ValidatorPriority.Normal,
+    fn: AlphanumericValidator,
   };
 
   static invalidText: AppValidatorFactoryConfig<string> = {

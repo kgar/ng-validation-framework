@@ -20,7 +20,7 @@ export abstract class FormServiceBase implements FormService {
   abstract init(): void;
 
   /**
-   * Performs reactive-forms-related submission steps for the most common use case.
+   * Performs reactive-forms-based submission steps for the most common use case.
    *
    * It is meant to be called by the consuming component on form submission.
    *

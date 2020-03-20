@@ -1,0 +1,11 @@
+form > * + * {
+  margin-top: 1em;
+}
+
+app-validated-control {
+  display: block;
+}
+
+app-error-message {
+  display: block;
+}
