@@ -3,14 +3,14 @@ import { Observable, of } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AppValidators } from '../shared/validation/services/app-validators.service';
 import { MappedFormBuilder } from '../shared/validation/services/mapped-form-builder.service';
-import { HomeForm } from './home-form.model';
+import { LoginForm } from './login-form.model';
 import { PasswordsMustMatchValidatorConfig } from './passwords-must-match-validator-config.model';
 import { ManualValidationHelpers } from '../shared/validation/services/manual-validation-helpers.service';
 
 @Injectable({
   providedIn: 'any',
 })
-export class HomeFormService extends FormServiceBase<HomeForm> {
+export class LoginFormService extends FormServiceBase<LoginForm> {
   public customFormGroupValidators = [PasswordsMustMatchValidatorConfig];
 
   constructor(private fb: MappedFormBuilder) {
@@ -23,7 +23,7 @@ export class HomeFormService extends FormServiceBase<HomeForm> {
       validationErrorKey: PasswordsMustMatchValidatorConfig.name,
     });
 
-    this.formGroup = this.fb.group<HomeForm>(
+    this.formGroup = this.fb.group<LoginForm>(
       {
         username: [
           '',

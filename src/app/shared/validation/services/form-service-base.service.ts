@@ -2,6 +2,7 @@ import { FormService } from '../models/form-service.model';
 import { Observable, Subscription, of } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { concatMap, take, map } from 'rxjs/operators';
+import { Patchable } from '../models/patchable.model';
 
 /**
  * Strategy-based class meant to handle many of
@@ -75,7 +76,7 @@ export abstract class FormServiceBase<TFormModel> implements FormService {
    * Allows a partial update to the form group.
    * @see https://angular.io/guide/reactive-forms#patching-the-model-value
    */
-  public patch(formModel: TFormModel) {
+  public patch(formModel: Patchable<TFormModel>) {
     this.formGroup.patchValue(formModel);
   }
 

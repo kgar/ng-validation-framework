@@ -1,12 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { HomeFormService } from './home-form.service';
+import { LoginFormService } from './login-form.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit, OnDestroy {
   get formGroup() {
     return this.formService.formGroup;
   }
@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     return this.formService.customFormGroupValidators;
   }
 
-  constructor(private formService: HomeFormService) {}
+  constructor(private formService: LoginFormService) {}
 
   ngOnInit(): void {
     this.formService.init();
@@ -28,7 +28,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     this.formService.submit().subscribe(success => {
-      console.log('did it succeed?', success);
       if (success) {
         alert('You did it!');
       }
