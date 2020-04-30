@@ -4,8 +4,8 @@ import { ValidatedControlComponent } from './components/validated-control/valida
 import { ValidatedFormGroupComponent } from './components/validated-form-group/validated-form-group.component';
 import { ValidationErrorIconComponent } from './components/validation-error-icon/validation-error-icon.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ErrorMessageComponent } from './components/error-message/error-message.component';
+import { ValidationMessageEmitterComponent } from './components/validation-message-emitter/validation-message-emitter.component';
 
 @NgModule({
   declarations: [
@@ -13,8 +13,15 @@ import { ErrorMessageComponent } from './components/error-message/error-message.
     ValidationErrorIconComponent,
     ValidatedFormGroupComponent,
     ErrorMessageComponent,
+    ValidationMessageEmitterComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, FontAwesomeModule],
-  exports: [ValidatedControlComponent, ValidationErrorIconComponent, ValidatedFormGroupComponent, ErrorMessageComponent],
+  imports: [CommonModule, ReactiveFormsModule],
+  exports: [
+    ValidatedControlComponent,
+    ValidationErrorIconComponent,
+    ValidatedFormGroupComponent,
+    ErrorMessageComponent,
+    ValidationMessageEmitterComponent
+  ],
 })
 export class ValidationModule {}

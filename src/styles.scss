@@ -1,3 +1,8 @@
+$fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
+
 /* You can add global styles to this file, and also import other style files */
 // Variables
 $ultra-dark-gray: #343435;
@@ -69,7 +74,7 @@ textarea {
   color: $magenta;
 }
 
-fa-icon.vf-error-icon {
+.vf-error-icon {
   @extend .vf-validation-error-message;
   margin-left: 0.5em;
 }

@@ -46,8 +46,4 @@ export class LoginFormService extends FormServiceBase<LoginForm> {
 
     this.formSubscriptions.push(subscription);
   }
-
-  protected save(): Observable<any> {
-    return of(undefined);
-  }
 }

@@ -18,24 +18,23 @@ export abstract class FormServiceBase<TFormModel> implements FormService {
    * Represents the initialization of the top-level form group.
    * Ensures that the form group will be ready for use after this function is called.
    */
-  abstract init(): void;
+  abstract init(...params: any): void;
 
   /**
-   * Performs reactive-forms-based submission steps for the most common use case.
+   * Performs reactive-forms-based validation steps for the most common use cases.
    *
-   * It is meant to be called by the consuming component on form submission.
+   * It is meant to be called by the consuming component before form submission.
    *
-   * Handles all submission-related tasks, including
+   * Handles all submission-time validation tasks, including
    * - a full synchronous validation check
    * - asynchronous validation check(s)
-   * - saving the form
    *
    * The observable returns
-   * - *true* when the save operation was successful
+   * - *true* when the form is valid
    * - *false* when validation fails
-   * - an error when an error occurs during saving the form data
+   * - an error when an error occurs during async validation
    */
-  public submit(): Observable<boolean> {
+  public validate(): Observable<boolean> {
     this.formGroup.markAllAsTouched();
     this.formGroup.updateValueAndValidity();
 
@@ -43,13 +42,13 @@ export abstract class FormServiceBase<TFormModel> implements FormService {
       return of(false);
     }
 
-    return this.buildAsyncValidatedSaveAttempt();
+    return this.buildAsyncValidationAttempt();
   }
 
-  private buildAsyncValidatedSaveAttempt(): Observable<boolean> {
+  private buildAsyncValidationAttempt(): Observable<boolean> {
     return this.validateAsync().pipe(
       concatMap(() => {
-        return this.formGroup.valid ? this.save().pipe(map(() => true)) : of(false);
+        return of(this.formGroup.valid);
       }),
       take(1),
     );
@@ -68,11 +67,6 @@ export abstract class FormServiceBase<TFormModel> implements FormService {
   }
 
   /**
-   * Saves data to the server.
-   */
-  protected abstract save(): Observable<any>;
-
-  /**
    * Allows a partial update to the form group.
    * @see https://angular.io/guide/reactive-forms#patching-the-model-value
    */
@@ -89,11 +83,13 @@ export abstract class FormServiceBase<TFormModel> implements FormService {
   }
 
   /**
-   * Unsubscribes from all form subscriptions that were collected since initialization.
+   * Unsubscribes from all form subscriptions that were collected since initialization
+   * and clears subscription list.
    *
    * Can be overridden to clean up additional resources.
    */
   public dispose() {
-    this.formSubscriptions.forEach(s => s.unsubscribe());
+    this.formSubscriptions.forEach((s) => s.unsubscribe());
+    this.formSubscriptions = [];
   }
 }

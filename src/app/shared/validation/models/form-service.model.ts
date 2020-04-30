@@ -14,5 +14,5 @@ export interface FormService {
   /**
    * Attempt to submit. True means success. False means validation caused the submission to fail.
    */
-  submit(): Observable<boolean>;
+  validate(): Observable<boolean>;
 }

@@ -1,4 +1,4 @@
-import { ValidatorFn, AsyncValidator, Validator } from '@angular/forms';
+import { ValidatorFn } from '@angular/forms';
 import { ValidationErrorMessage } from './validation-error-message.type';
 
 /**

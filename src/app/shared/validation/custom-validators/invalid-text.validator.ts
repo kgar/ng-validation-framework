@@ -1,6 +1,6 @@
 import { ValidatorFn, AbstractControl } from '@angular/forms';
 
-export function InvalidTextValidatorFactory(invalidText: string): ValidatorFn {
+export function invalidTextValidatorFactory(invalidText: string): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     const invalidTextDetected =
       (control.value?.toString() as string)?.toLocaleLowerCase() ===

@@ -33,11 +33,11 @@
       <button kendoButton style="margin-left: 1em" (click)="deselectAnimationType()" type="button">
         Deselect Animation Type
       </button>
-      <fa-icon
+      <i
         *ngIf="animationTypeValidation.showError"
-        [icon]="faPizzaSlice"
+        class="fa fa-pizza-slice"
         style="color: #C8154F; margin-left: 0.5em"
-      ></fa-icon>
+      ></i>
     </app-validated-control>
     <div class="show-run-container">
       <div>

@@ -11,7 +11,7 @@ export interface ManualValidatorArgs {
  * - submission-time async validation where the form and affected controls need
  *   to be programmatically decorated as invalid after a server call.
  */
-export function ManualValidator({
+export function manualValidator({
   isValidCallback,
   validationErrorKey = 'manual',
 }: ManualValidatorArgs) {

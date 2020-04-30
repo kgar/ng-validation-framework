@@ -1,11 +1,23 @@
-<div class="vf-validated-control-container" [class.invalid]="showError">
+<div
+  class="vf-validated-control-container"
+  [class.invalid]="showError"
+  [attr.title]="showError && messageExceedsCharacterLimit ? errorMessage : null"
+>
   <div *ngIf="useLabelAndErrorIconProps" class="vf-label-icon-container">
     <label class="vf-validated-control-label" [for]="labelFor">{{ label }}</label>
     <app-validation-error-icon *ngIf="showError"></app-validation-error-icon>
   </div>
   <ng-content></ng-content>
-  <app-error-message
-    *ngIf="useDefaultMessagePlacement && showError"
-    [errorMessage]="errorMessage"
-  ></app-error-message>
+
+  <app-error-message *ngIf="useDefaultMessagePlacement && showError">
+    <ng-container
+      *ngIf="messageExceedsCharacterLimit; then shortenedMessage; else fullMessage"
+    ></ng-container>
+    <ng-template #fullMessage>
+      {{ errorMessage }}
+    </ng-template>
+    <ng-template #shortenedMessage>
+      Invalid input
+    </ng-template>
+  </app-error-message>
 </div>

@@ -12,12 +12,16 @@ export class ValidatedControlComponent extends ValidatedComponentBase implements
   @Input() label = undefined;
   @Input() labelFor = '';
   @Input() useLabelAndErrorIconProps = true;
+  @Input() errorMessageCharacterLimit?: number = undefined;
+
+  get messageExceedsCharacterLimit() {
+    return (
+      this.errorMessageCharacterLimit !== undefined &&
+      this.errorMessage.length > this.errorMessageCharacterLimit
+    );
+  }
 
   public get errorMessage() {
-    if (this.control?.errors?.validatedControlForcedError) {
-      return '';
-    }
-
     return super.getHighestPriorityErrorMessage(this.control);
   }
 

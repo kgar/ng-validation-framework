@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { faInfoCircle, faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
 import { SandboxFormService } from './sandbox-form.service';
 import { tap } from 'rxjs/operators';
 
@@ -9,8 +8,6 @@ import { tap } from 'rxjs/operators';
   styleUrls: ['./sandbox.component.scss'],
 })
 export class SandboxComponent implements OnInit, OnDestroy {
-  faInfoCircle = faInfoCircle;
-  faPizzaSlice = faPizzaSlice;
   isSubmitting = false;
 
   get formGroup() {
@@ -36,7 +33,7 @@ export class SandboxComponent implements OnInit, OnDestroy {
   onSubmit() {
     this.isSubmitting = true;
     this.formService
-      .submit()
+      .validate()
       .pipe(tap(() => (this.isSubmitting = false)))
       .subscribe(success => {
         if (success) {
