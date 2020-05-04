@@ -83,13 +83,15 @@ export abstract class FormServiceBase<TFormModel> implements FormService {
   }
 
   /**
-   * Unsubscribes from all form subscriptions that were collected since initialization
-   * and clears subscription list.
+   * Unsubscribes from all form subscriptions that were collected since initialization,
+   * clears subscription list, and
+   * clears the form group.
    *
    * Can be overridden to clean up additional resources.
    */
   public dispose() {
     this.formSubscriptions.forEach((s) => s.unsubscribe());
     this.formSubscriptions = [];
+    this.formGroup = undefined;
   }
 }
