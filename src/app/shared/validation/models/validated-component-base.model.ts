@@ -1,4 +1,4 @@
-import { Input } from '@angular/core';
+import { Input, Directive } from '@angular/core';
 import { CustomValidationErrorMessages } from './custom-validation-error-messages.model';
 import {
   AbstractControlDirective,
@@ -8,6 +8,7 @@ import {
 import { ValidationService } from '../services/validation.service';
 import { AppValidatorConfig } from './app-validator-config.model';
 
+@Directive()
 export class ValidatedComponentBase {
   /**
    * A collection of message overrides for globally available application validators
